@@ -26,12 +26,13 @@
   color: #fefefe;
   font-family: "Roboto";
 
-  & h1 {
+  & h1, h2 {
     font-weight: 100;
   }
 
   & h3 {
     color:   #267953;
+    font-weight: 300;
   }
 
   &::selection {
