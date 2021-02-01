@@ -2,21 +2,33 @@
   <div id="app">
     <header>
       <div id="nav">
-        <router-link to="/">Home</router-link> |
-        <router-link to="/about">About</router-link>
+        <router-link to="/">Movies</router-link>
+        <router-link to="/tv-series">Tv Series</router-link>
+        <router-link to="/genres">Genres</router-link>
+        <router-link to="/people">People</router-link>
       </div>
     </header>
 
     <router-view />
+    <footer>
+      <div class="credits">
+        thanks to <div class="thanks"><a href="https://github.com/franci-star/" target="_blank">franci-star</a> </div> for the design
+      </div>
+    </footer>
   </div>
 </template>
 
-<style lang="scss">
+<script>
+export default {
 
-  @import "~@fontsource/roboto/index.css";
-  @import "~@fontsource/roboto/100.css";
-  @import "~@fontsource/roboto/300.css";
-  @import "~@fontsource/roboto/500.css";
+};
+</script>
+
+<style lang="scss">
+@import "~@fontsource/roboto/index.css";
+@import "~@fontsource/roboto/100.css";
+@import "~@fontsource/roboto/300.css";
+@import "~@fontsource/roboto/500.css";
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -26,29 +38,45 @@
   color: #fefefe;
   font-family: "Roboto";
 
-  & h1, h2 {
+  & h1,
+  h2 {
     font-weight: 100;
   }
 
   & h3 {
-    color:   #267953;
+    color: #267953;
     font-weight: 300;
   }
 
   &::selection {
-    background: transparentize($color: #42b983, $amount: 0.5)
+    background: transparentize($color: #42b983, $amount: 0.5);
   }
 }
 
 #nav {
-  padding: 30px;
+  padding: 60px 30px;
 
   a {
-    font-weight: bold;
+    font-weight: 300;
     color: #fff;
+    font-size: 16px;
+    margin: 0 20px;
+    padding: 8px 10px;
+    border-radius: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    opacity: 0.4;
+    transition: color 0.6s ease, border-color 0.4s ease, opacity 0.4s linear;
+    padding-bottom: 10px;
+    border: 1px solid transparent;
+    &:hover {
+      opacity: 0.7;
+    }
 
     &.router-link-exact-active {
       color: #42b983;
+      opacity: 1;
+      border-color: #42b983;
     }
   }
 
@@ -58,8 +86,8 @@ body {
   background-color: #1c2631 !important;
 
   a:hover {
-    text-decoration: none ;
-    color: #35ad75 ;
+    text-decoration: none;
+    color: #35ad75;
   }
   .btn-vue {
     color: #fff;
@@ -76,6 +104,41 @@ body {
   .btn:focus {
     box-shadow: none;
   }
+}
+
+footer {
+      min-height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+
+      .credits {
+        text-transform: uppercase;
+        font-weight: 300;
+        display: flex;
+        justify-content: center;
+      }
+       a {
+          margin-left: 5px;
+          margin-right: 5px;
+          color: #42b983;
+          transition: color 1.2s ease;
+       }
+
+       a:hover {
+         color: #69c99e;
+       }
+
+       .thanks {
+         margin-left: 2px;
+         margin-right: 2px;
+         transition: transform 0.8s ease;
+       }
+       .thanks:hover {
+         
+         transform: translateY(-2px);
+       }
 
 }
 </style>

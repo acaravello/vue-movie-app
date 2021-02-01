@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <HelloWorld msg="Latest Trending Movies" />
     <div class="movies-list-container">
       <div class="cards-container">
         <div class="card" v-for="movie in latestMovies" :key="movie.id">
@@ -43,7 +43,7 @@ export default {
   beforeMount() {
     this.$store.dispatch("checkLatestMovies")
   }
-
+  
 };
 </script>
 
