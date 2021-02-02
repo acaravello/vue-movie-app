@@ -11,6 +11,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.tv-series {
+  margin-top: 30px;
+}
 </style>
 

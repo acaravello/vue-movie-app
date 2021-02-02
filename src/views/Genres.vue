@@ -1,3 +1,4 @@
+
 <template>
   <div class="genres">
     <h1>Genres</h1>
@@ -11,6 +12,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.genres {
+  margin-top: 30px;
+}
 </style>
-

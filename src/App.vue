@@ -9,7 +9,8 @@
       </div>
     </header>
 
-    <router-view />
+      <router-view />
+    
     <footer>
       <div class="credits">
         thanks to <div class="thanks"><a href="https://github.com/franci-star/" target="_blank">franci-star</a> </div> for the design
@@ -37,6 +38,9 @@ export default {
   text-align: center;
   color: #fefefe;
   font-family: "Roboto";
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 
   & h1,
   h2 {
@@ -82,6 +86,7 @@ export default {
 
 }
 
+
 body {
   background-color: #1c2631 !important;
 
@@ -112,6 +117,7 @@ footer {
       align-items: center;
       justify-content: center;
       padding: 30px;
+      margin-top: auto;
 
       .credits {
         text-transform: uppercase;

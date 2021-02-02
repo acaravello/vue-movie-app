@@ -11,6 +11,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.people {
+  margin-top: 30px;
+}
 </style>
 

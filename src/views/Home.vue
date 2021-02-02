@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
     <HelloWorld msg="Latest Trending Movies" />
     <div class="movies-list-container">
       <div class="cards-container">
@@ -49,6 +48,8 @@ export default {
 
 <style lang="scss" scoped>
 .home {
+
+  margin-top: 30px;
 
   .movies-list-container {
     display: flex;

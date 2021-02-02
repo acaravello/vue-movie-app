@@ -4,7 +4,6 @@
     <p>
       Scheda dettaglio <br>
       Label con colori dinamici in card <br>
-      logo vue on top right corner<br>
       add buymeacoffe to website <br>
       For a guide and recipes on how to configure / customize this project,<br>
       check out the
