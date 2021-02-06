@@ -3,7 +3,7 @@
     <HelloWorld msg="Latest Trending Movies" />
     <div class="movies-list-container">
       <div class="cards-container">
-        <div class="card" v-for="movie in latestMovies" :key="movie.id">
+        <div class="card" v-for="movie in latestMovies" :key="movie.id" @click="toMovieDetail(movie)">
           <img :src="imageRootPath + movie.poster_path" class="card-img-top" :alt="movie.original_title" />
           <div class="card-body">
             <h5 class="card-title">{{movie.original_title}}</h5>
@@ -37,6 +37,10 @@ export default {
   }),
 
   methods: {
+    toMovieDetail(movie) {
+      this.$store.dispatch("setMovieDetail", movie)
+      this.$router.push({path: "/detail"})
+    }
   },
 
   beforeMount() {
@@ -55,7 +59,7 @@ export default {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    margin: 48px auto 48px auto;
+    margin: 48px auto 24px auto;
 
     .button-container {
       width: 200px;
@@ -83,6 +87,13 @@ export default {
             margin-bottom: 48px;
             border:none;
             box-shadow:  0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+            cursor: pointer;
+            opacity:1;
+            transition: opacity 0.8s ease;
+
+            &:hover {
+              opacity: 0.6;
+            }
 
             h5 {
               line-height: 1.7rem;

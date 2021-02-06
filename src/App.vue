@@ -58,7 +58,7 @@ export default {
 }
 
 #nav {
-  padding: 60px 30px;
+  padding: 40px 30px;
 
   a {
     font-weight: 300;
@@ -112,7 +112,6 @@ body {
 }
 
 footer {
-      min-height: 100px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -124,17 +123,14 @@ footer {
         font-weight: 300;
         display: flex;
         justify-content: center;
+        line-height: 16px;
       }
        a {
           margin-left: 5px;
           margin-right: 5px;
           color: #42b983;
-          transition: color 1.2s ease;
        }
 
-       a:hover {
-         color: #69c99e;
-       }
 
        .thanks {
          margin-left: 2px;
