@@ -2,7 +2,7 @@
   <div id="app">
     <header>
       <div id="nav">
-        <router-link to="/">Movies</router-link>
+        <router-link to="/" v-bind:class="$route.path === '/detail' ? 'router-link-exact-active' : null">Movies</router-link>
         <router-link to="/tv-series">Tv Series</router-link>
         <router-link to="/genres">Genres</router-link>
         <router-link to="/people">People</router-link>
