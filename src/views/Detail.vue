@@ -12,11 +12,12 @@
              <div class="info-container col-xs-12 col-md-8 col-lg7">
 
                <div class="title-container">
-                 <h2 class="movie-title">{{title}}</h2>
+                 
                </div>
 
               
               <div class="inner-content">
+                <h2 class="movie-title">{{title}}</h2>
                 <h4 class="movie-tagline">{{tagline}}</h4>
               <p class="movie-overview">{{movieDetail.overview}}</p>
 

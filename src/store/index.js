@@ -95,7 +95,8 @@ export default new Vuex.Store({
 
     setBudget(state, userData) {
       if(userData && userData !== 0) {
-        state.budget = " $" + userData
+        let userDataFormatted = userData.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        state.budget = " $" + userDataFormatted;
       } else {
         state.budget = null;
       }
@@ -103,7 +104,8 @@ export default new Vuex.Store({
 
     setRevenue(state, userData) {
       if(userData && userData !== 0) {
-        state.revenue = " $" + userData
+        let userDataFormatted = userData.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        state.revenue = " $" + userDataFormatted;
       } else {
         state.revenue = null;
       }

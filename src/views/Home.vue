@@ -89,6 +89,8 @@ export default {
             cursor: pointer;
             opacity:1;
             transition: opacity 0.8s ease;
+            background: -webkit-linear-gradient(to top, #35495E, #00b35f);
+            background: linear-gradient(to top, #35495E, #00b35f);
 
             &:hover {
               opacity: 0.6;
