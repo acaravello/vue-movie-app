@@ -31,6 +31,7 @@ export default {
 @import "~@fontsource/roboto/300.css";
 @import "~@fontsource/roboto/500.css";
 
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -53,7 +54,7 @@ export default {
   }
 
   &::selection {
-    background: transparentize($color: #42b983, $amount: 0.5);
+    background: transparentize($color: #00e67a, $amount: 0.5);
   }
 }
 
@@ -78,9 +79,9 @@ export default {
     }
 
     &.router-link-exact-active {
-      color: #42b983;
+      color: #00e67a;
       opacity: 1;
-      border-color: #42b983;
+      border-color: #00e67a;
     }
   }
 
@@ -92,18 +93,18 @@ body {
 
   a:hover {
     text-decoration: none;
-    color: #35ad75;
+    color: #00cc6d;
   }
   .btn-vue {
     color: #fff;
-    background-color: #42b983;
-    border-color: #42b983;
+    background-color: #00e67a;
+    border-color: #00e67a;
   }
 
   .btn-vue:hover {
     color: #fff;
-    background-color: #35ad75;
-    border-color: #35ad75;
+    background-color: #00cc6d;
+    border-color: #00cc6d;
   }
 
   .btn:focus {
@@ -128,7 +129,7 @@ footer {
        a {
           margin-left: 5px;
           margin-right: 5px;
-          color: #42b983;
+          color: #00e67a;
        }
 
 
@@ -136,7 +137,9 @@ footer {
          margin-left: 2px;
          margin-right: 2px;
          transition: transform 0.8s ease;
+         font-weight: 500;
        }
+
        .thanks:hover {
          
          transform: translateY(-2px);

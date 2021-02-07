@@ -10,9 +10,41 @@
                <img :src="this.posterPath" alt="poster"/>
              </div>
              <div class="info-container col-xs-12 col-md-8 col-lg7">
-              <h2 class="movie-title">{{movieDetail.title}}</h2>
-              <h4 class="movie-tagline">{{tagline}}</h4>
+
+               <div class="title-container">
+                 <h2 class="movie-title">{{title}}</h2>
+               </div>
+
+              
+              <div class="inner-content">
+                <h4 class="movie-tagline">{{tagline}}</h4>
               <p class="movie-overview">{{movieDetail.overview}}</p>
+
+              <div class="stats-container">
+                <div class="stats-column">
+                  <div class="stats-category">
+                    <h5 class="stats-title">Release date:</h5>
+                    <div class="stats-info">{{release_date}}</div>
+                  </div>
+                  <div class="stats-category" v-if="budget && revenue">
+                    <h5 class="stats-title">Budget:</h5>
+                    <div class="stats-info">{{budget}}</div>
+                  </div>
+                </div>
+                <div class="stats-column">
+                  <div class="stats-category">
+                    <h5 class="stats-title">Vote Average:</h5>
+                    <div class="stats-info">{{vote_average}}</div>
+                  </div>
+                   <div class="stats-category" v-if="budget && revenue">
+                    <h5 class="stats-title">Revenue:</h5>
+                    <div class="stats-info">{{revenue}}</div>
+                  </div>
+                </div>
+              </div>
+              </div>
+              
+
              </div>
            </div>
          </div>
@@ -48,13 +80,28 @@ export default {
       return this.$store.getters.movieDetail
       },
 
-      movieDetailComplete() {
-        console.log("Movie detail complete is");
-        return this.$store.getters.movieDetailComplete;
-      },
-
       tagline() {
         return this.$store.getters.tagline;
+      },
+
+      title() {
+        return this.$store.getters.title;
+      },
+
+      release_date() {
+        return this.$store.getters.release_date;
+      },
+
+      vote_average() {
+        return this.$store.getters.vote_average;
+      },
+
+      budget() {
+        return this.$store.getters.budget;
+      },
+
+      revenue() {
+        return this.$store.getters.revenue
       }
 
     },
@@ -91,20 +138,76 @@ export default {
       .detail-card {
         min-height: 300px;
         display:flex;
+        background: rgba(0,0,0,.85);
+        border-radius: 3px;
 
           .image-container {
+            margin-left: -30px;
 
             img {
               width: 100%;
             }
-
           }
 
           .info-container {
+            display: flex;
+            flex-direction: column;
+            padding: 20px 30px 20px 15px ;
+            margin-left: -15px;
+            align-items: center;
+
+            .title-container {
+              margin-top: 10px;
+            }
+
+            .inner-content {
+              display: flex;
+              flex-direction: column;
+              margin: auto;
+
+              .movie-overview {
+              margin: 10px;
+              font-size: 15px;
+            }
+
+            .movie-tagline {
+              color: #00e67a;
+              margin-top: 5px;
+            }
+
+            .stats-container {
+              margin-top: 20px;
+              display: flex;
+              flex-direction: row;
+              justify-content: space-around;
+
+              .stats-column {
+                display: flex;
+                flex-direction: column;
+               
+
+                h5 {
+                  font-size: 1.35rem;
+                  font-weight: 300;
+                }
+
+                .stats-info {
+                  font-size: 30px;
+                  color: #00e67a;
+                  line-height: 32px;
+                  margin-bottom: 30px;
+                }
+              }
+            }
+
+            }
+
           }
+
       }
 
     }
+
   }
 
 

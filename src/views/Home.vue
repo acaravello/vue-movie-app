@@ -1,12 +1,11 @@
 <template>
   <div class="home">
-    <HelloWorld msg="Latest Trending Movies" />
     <div class="movies-list-container">
       <div class="cards-container">
         <div class="card" v-for="movie in latestMovies" :key="movie.id" @click="toMovieDetail(movie)">
           <img :src="imageRootPath + movie.poster_path" class="card-img-top" :alt="movie.original_title" />
           <div class="card-body">
-            <h5 class="card-title">{{movie.original_title}}</h5>
+            <h5 class="card-title">{{movie.title}}</h5>
             <p class="card-text">
               {{movie.overview}}
             </p>
@@ -98,7 +97,7 @@ export default {
             h5 {
               line-height: 1.7rem;
               text-transform: uppercase;
-              border-bottom: 1px solid #41B883;
+              border-bottom: 1px solid #00b35f;
               padding-bottom: 5px;
             }
 
@@ -108,8 +107,8 @@ export default {
 
             .card-body {
               background: #35495E;
-              background: -webkit-linear-gradient(to top, #41B883, #35495E);
-              background: linear-gradient(to top, #41B883, #35495E);
+              background: -webkit-linear-gradient(to top, #00b35f, #35495E);
+              background: linear-gradient(to top, #00b35f, #35495E);
 
               .card-text {
               font-size: 13px;

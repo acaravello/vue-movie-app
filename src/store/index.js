@@ -11,8 +11,12 @@ export default new Vuex.Store({
     latestMovies: null,
     movieDetail: null,
     backdropPath: null,
-    movieDetailComplete: null,
-    tagline: null
+    tagline: null,
+    title: null,
+    release_date: null,
+    vote_average: null,
+    budget: null,
+    revenue: null,
 
   },
 
@@ -31,13 +35,28 @@ export default new Vuex.Store({
       return state.backdropPath;
     },
 
-    movieDetailComplete(state) {
-      console.log("getter of moviedetail complete")
-      return state.movieDetailComplete;
-    },
-
     tagline(state) {
       return state.tagline
+    },
+
+    title(state) {
+      return state.title
+    },
+
+    release_date(state) {
+      return state.release_date;
+    },
+
+    vote_average(state) {
+      return state.vote_average;
+    },
+
+    budget(state) {
+      return state.budget;
+    },
+
+    revenue(state) {
+      return state.revenue;
     }
 
   },
@@ -58,12 +77,36 @@ export default new Vuex.Store({
       state.backdropPath = userData;
     },
 
-    setMovieDetailComplete(state, userData) {
-      state.movieDetailComplete = userData
-    },
-
     setTagline(state, userData) {
       state.tagline = userData;
+    },
+
+    setTitle(state, userData) {
+      state.title = userData
+    },
+
+    setReleaseDate(state, userData) {
+      state.release_date = userData;
+    },
+
+    setVoteAverage(state, userData) {
+      state.vote_average = userData;
+    },
+
+    setBudget(state, userData) {
+      if(userData && userData !== 0) {
+        state.budget = " $" + userData
+      } else {
+        state.budget = null;
+      }
+    },
+
+    setRevenue(state, userData) {
+      if(userData && userData !== 0) {
+        state.revenue = " $" + userData
+      } else {
+        state.revenue = null;
+      }
     }
 
   },
@@ -94,18 +137,34 @@ export default new Vuex.Store({
     },
 
     getMovieDetailFromId({commit, state}) {
+
       const key =process.env.VUE_APP_API_KEY;
+
+      //cancel previous data
+      commit("setTagline", "");
+      commit("setTitle", "");
+      commit("setVoteAverage", "");
+      commit("setBudget", null),
+      commit("setRevenue", null)
+
       if(state.movieDetail && state.movieDetail.id) {
         axios.get(`https://api.themoviedb.org/3/movie/${state.movieDetail.id}?api_key=${key}&language=en-US`)
         .then(response => {
-          commit("setMovieDetailComplete", response.data);
+          console.log("response data");
+          console.log(response.data)
           commit("setTagline", response.data.tagline);
+          commit("setTitle", response.data.title);
+          commit("setReleaseDate", response.data.release_date);
+          commit("setVoteAverage", response.data.vote_average);
+          commit("setBudget", response.data.budget);
+          commit("setRevenue", response.data.revenue)
         })
         .catch(error => {
           console.log("Error in contacting movie db");
           console.log(error)
         })
       }
+
     }
   },
 
