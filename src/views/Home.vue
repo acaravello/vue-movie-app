@@ -1,5 +1,9 @@
 <template>
   <div class="home">
+    <div class="selector-container">
+      <button class="type-selector btn" @click="searchPopular" :class="selectionType === 'popular' ? 'active' : null">Popular</button>
+      <button class="type-selector btn" @click="searchLatest" :class="selectionType === 'latest' ? 'active' : null">Latest</button>
+    </div>
     <div class="movies-list-container">
       <div class="cards-container">
         <div class="card" v-for="movie in latestMovies" :key="movie.id" @click="toMovieDetail(movie)">
@@ -28,6 +32,7 @@ export default {
   data() {
     return {
       imageRootPath: "https://image.tmdb.org/t/p/original",
+      selectionType: "popular"
     };
   },
 
@@ -39,6 +44,18 @@ export default {
     toMovieDetail(movie) {
       this.$store.dispatch("setMovieDetail", movie)
       this.$router.push({path: "/detail"})
+    },
+    searchPopular() {
+      console.log("Searching Popular");
+      if(this.selectionType !== "popular") {
+        this.selectionType = "popular";
+      }
+    },
+    searchLatest() {
+      console.log("Searching Latest");
+      if(this.selectionType !== "latest") {
+        this.selectionType = "latest";
+      }
     }
   },
 
@@ -53,6 +70,41 @@ export default {
 .home {
 
   margin-top: 30px;
+
+  .selector-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 60px;
+    margin-bottom: 60px;
+
+    .type-selector {
+          color: #fff;
+          border-color: transparent;
+          text-transform: uppercase;
+          margin-left: 10px;
+          margin-right: 10px;
+          opacity: 1;
+          transition: opacity 0.8s ease, color 0.6s ease, border-color 0.4s ease;
+          line-height: 20px;
+
+          &:hover {
+            opacity: 0.8;
+          }
+
+          &.active {
+            color: #00E67A;
+            border: 1px solid #00E67A;
+            transition: border-color 0.8s ease, opacity 0.8s ease;
+            opacity: 1;
+            background-color: transparent;
+          }
+
+          &.active:hover {
+            border-bottom-color: rgba(0,230,122, 0.8);
+            opacity: 0.8
+          }
+    }
+  }
 
   .movies-list-container {
     display: flex;
