@@ -43,25 +43,39 @@
                   </div>
                 </div>
               </div>
-              </div>
-              
 
+               <div class="back-container">
+                <a @click="goBack">
+                  <back-icon />
+                  <span class="link-text">Back</span>
+              </a>
+              </div>
+
+              </div>
              </div>
            </div>
          </div>
        </div>
+
      </div>
+
    </div>
   </div>
 </template>
 
 <script>
+import BackIcon from '../assets/icons/backIcon.vue'
+
 
 export default {
 
     name: "detail",
 
-    data() {
+    components: {
+      BackIcon
+    },
+ 
+      data() {
 
       return {
       show: false,
@@ -116,6 +130,13 @@ export default {
        document.getElementById("detail-container").style.backgroundImage =  `url(` + backgroundImage +  ` )`;
        this.show = true;
     },
+
+    methods: {
+      goBack()  {
+        console.log("tring to go back")
+        this.$router.back();
+      }
+    }
 
 }
 
@@ -209,8 +230,39 @@ export default {
 
     }
 
+    .back-container {
+      margin-top: 30px;
+      text-transform: uppercase;
+      opacity: 1;
+      transition: opacity 0.8s ease;
+
+      &:hover {
+        opacity: 0.8;
+      }
+
+       a {
+         border: 1px solid #00e67a;
+         padding: .475rem .95rem;
+         line-height: 20px;
+         border-radius: .25rem;
+         font-size: 0.8rem;
+         color: #00e67a;
+         cursor: pointer;
+
+          svg {
+          width:15px;
+          height: auto;
+          fill: #00e67a;
+          margin-right: 8px;
+          margin-bottom: 3px;
+        }
+       }
+      
+    }
+
   }
 
+  
 
 }
 </style>

@@ -77,8 +77,6 @@ export default new Vuex.Store({
     },
 
     setMovieDetail(state, userData) {
-      console.log("userdata");
-      console.log(userData)
       state.movieDetail = userData;
     },
 
