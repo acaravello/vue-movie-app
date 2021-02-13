@@ -3,9 +3,9 @@
     <header>
       <div id="nav">
         <router-link to="/" v-bind:class="$route.path === '/detail' ? 'router-link-exact-active' : null">Movies</router-link>
-        <router-link to="/tv-series">Tv Series</router-link>
-        <router-link to="/genres">Genres</router-link>
-        <router-link to="/people">People</router-link>
+        <router-link to="/tv-series" @click.native="resetState">Tv Series</router-link>
+        <router-link to="/genres" @click.native="resetState">Genres</router-link>
+        <router-link to="/people" @click.native="resetState">People</router-link>
       </div>
     </header>
 
@@ -21,7 +21,11 @@
 
 <script>
 export default {
-
+  methods: {
+    resetState() {
+      this.$store.dispatch("setMovieActiveSection", "popular")
+    }
+  }
 };
 </script>
 

@@ -1,11 +1,11 @@
 <template>
   <div class="home">
     <div class="selector-container">
-      <button class="type-selector btn" @click="searchPopular" :class="selectionType === 'popular' ? 'active' : null">Popular</button>
-      <button class="type-selector btn" @click="searchLatest" :class="selectionType === 'latest' ? 'active' : null">Latest</button>
+      <button class="type-selector btn" @click="searchPopular" :class="movieActiveSection === 'popular' ? 'active' : null">Popular</button>
+      <button class="type-selector btn" @click="searchLatest" :class="movieActiveSection === 'latest' ? 'active' : null">Latest</button>
     </div>
     <div class="movies-list-container">
-      <div class="cards-container" v-if="selectionType === 'popular'">
+      <div class="cards-container" v-if="movieActiveSection === 'popular'">
         <div class="card" v-for="movie in popularMovies" :key="movie.id" @click="toMovieDetail(movie)">
           <img :src="imageRootPath + movie.poster_path" class="card-img-top" :alt="movie.original_title" />
           <div class="card-body">
@@ -16,7 +16,7 @@
           </div>
         </div>
       </div>
-       <div class="cards-container" v-if="selectionType === 'latest'">
+       <div class="cards-container" v-if="movieActiveSection === 'latest'">
         <div class="card" v-for="movie in latestMovies" :key="movie.id" @click="toMovieDetail(movie)">
           <img :src="imageRootPath + movie.poster_path" class="card-img-top" :alt="movie.original_title" />
           <div class="card-body">
@@ -43,28 +43,31 @@ export default {
   data() {
     return {
       imageRootPath: "https://image.tmdb.org/t/p/original",
-      selectionType: "popular"
     };
   },
 
   computed: mapGetters({
     popularMovies: "popularMovies",
-    latestMovies: "latestMovies"
+    latestMovies: "latestMovies",
+    movieActiveSection: "movieActiveSection",
   }),
 
   methods: {
+
     toMovieDetail(movie) {
       this.$store.dispatch("setMovieDetail", movie)
       this.$router.push({path: "/detail"})
     },
+
     searchPopular() {
-      if(this.selectionType !== "popular") {
-        this.selectionType = "popular";
+      if(this.movieActiveSection !== "popular") {
+        this.$store.dispatch("setMovieActiveSection", "popular")
       }
     },
+
     searchLatest() {
-      if(this.selectionType !== "latest") {
-        this.selectionType = "latest";
+      if(this.movieActiveSection !== "latest") {
+        this.$store.dispatch("setMovieActiveSection", "latest")
       }
     }
   },

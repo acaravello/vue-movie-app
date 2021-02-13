@@ -18,6 +18,7 @@ export default new Vuex.Store({
     vote_average: null,
     budget: null,
     revenue: null,
+    movieActiveSection: "popular",
 
   },
 
@@ -62,7 +63,11 @@ export default new Vuex.Store({
 
     revenue(state) {
       return state.revenue;
-    }
+    },
+
+    movieActiveSection(state) {
+      return state.movieActiveSection;
+    },
 
   },
 
@@ -116,7 +121,11 @@ export default new Vuex.Store({
       } else {
         state.revenue = null;
       }
-    }
+    },
+
+    setMovieActiveSection(state, userData) {
+      state.movieActiveSection = userData;
+    },
 
   },
 
@@ -191,8 +200,11 @@ export default new Vuex.Store({
           console.log(error)
         })
       }
+    },
 
-    }
-  },
+    setMovieActiveSection({commit}, element) {
+      commit("setMovieActiveSection", element);
+    },
 
+  }
 })
