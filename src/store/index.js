@@ -9,6 +9,7 @@ export default new Vuex.Store({
   state: {
 
     latestMovies: null,
+    popularMovies: null,
     movieDetail: null,
     backdropPath: null,
     tagline: null,
@@ -25,6 +26,10 @@ export default new Vuex.Store({
 
     latestMovies(state) {
       return state.latestMovies;
+    },
+
+    popularMovies(state) {
+      return state.popularMovies;
     },
 
     movieDetail(state) {
@@ -65,6 +70,10 @@ export default new Vuex.Store({
 
     setLatestMovies(state, userData) {
       state.latestMovies = userData;
+    },
+
+    setPopularMovies(state, userData) {
+      state.popularMovies = userData;
     },
 
     setMovieDetail(state, userData) {
@@ -119,13 +128,31 @@ export default new Vuex.Store({
       const key = process.env.VUE_APP_API_KEY;
       axios
         .get(
-          `https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`
+          `https://api.themoviedb.org/3/movie/now_playing?api_key=${key}&language=en-US&page=1`
+          
         )
         .then((response) => {
           console.log("latest movies are");
           console.log(response);
           commit("setLatestMovies", response.data.results)
-          this.latestMovies = response.data.results;
+        })
+        .catch((error) => {
+          console.log("Error in contacting movie db");
+          console.log(error);
+        });
+    },
+
+    checkPopularMovies({commit}) {
+      const key = process.env.VUE_APP_API_KEY;
+      axios
+        .get(
+          `https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`
+          
+        )
+        .then((response) => {
+          console.log("popular movies are");
+          console.log(response);
+          commit("setPopularMovies", response.data.results)
         })
         .catch((error) => {
           console.log("Error in contacting movie db");

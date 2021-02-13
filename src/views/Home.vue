@@ -5,7 +5,18 @@
       <button class="type-selector btn" @click="searchLatest" :class="selectionType === 'latest' ? 'active' : null">Latest</button>
     </div>
     <div class="movies-list-container">
-      <div class="cards-container">
+      <div class="cards-container" v-if="selectionType === 'popular'">
+        <div class="card" v-for="movie in popularMovies" :key="movie.id" @click="toMovieDetail(movie)">
+          <img :src="imageRootPath + movie.poster_path" class="card-img-top" :alt="movie.original_title" />
+          <div class="card-body">
+            <h5 class="card-title">{{movie.title}}</h5>
+            <p class="card-text">
+              {{movie.overview}}
+            </p>
+          </div>
+        </div>
+      </div>
+       <div class="cards-container" v-if="selectionType === 'latest'">
         <div class="card" v-for="movie in latestMovies" :key="movie.id" @click="toMovieDetail(movie)">
           <img :src="imageRootPath + movie.poster_path" class="card-img-top" :alt="movie.original_title" />
           <div class="card-body">
@@ -37,6 +48,7 @@ export default {
   },
 
   computed: mapGetters({
+    popularMovies: "popularMovies",
     latestMovies: "latestMovies"
   }),
 
@@ -46,13 +58,11 @@ export default {
       this.$router.push({path: "/detail"})
     },
     searchPopular() {
-      console.log("Searching Popular");
       if(this.selectionType !== "popular") {
         this.selectionType = "popular";
       }
     },
     searchLatest() {
-      console.log("Searching Latest");
       if(this.selectionType !== "latest") {
         this.selectionType = "latest";
       }
@@ -60,7 +70,8 @@ export default {
   },
 
   beforeMount() {
-    this.$store.dispatch("checkLatestMovies")
+    this.$store.dispatch("checkLatestMovies");
+    this.$store.dispatch("checkPopularMovies");
   }
   
 };
