@@ -7,7 +7,7 @@
     <div class="movies-list-container">
       <div class="cards-container" v-if="movieActiveSection === 'popular'">
         <div class="card" v-for="movie in popularMovies" :key="movie.id" @click="toMovieDetail(movie)">
-          <img :src="imageRootPath + movie.poster_path" class="card-img-top" :alt="movie.original_title" />
+          <img :src="imageRootPath + movie.poster_path" class="card-img-top" :alt="movie.title" />
           <div class="card-body">
             <h5 class="card-title">{{movie.title}}</h5>
             <p class="card-text">
@@ -18,7 +18,7 @@
       </div>
        <div class="cards-container" v-if="movieActiveSection === 'latest'">
         <div class="card" v-for="movie in latestMovies" :key="movie.id" @click="toMovieDetail(movie)">
-          <img :src="imageRootPath + movie.poster_path" class="card-img-top" :alt="movie.original_title" />
+          <img :src="imageRootPath + movie.poster_path" class="card-img-top" :alt="movie.titles" />
           <div class="card-body">
             <h5 class="card-title">{{movie.title}}</h5>
             <p class="card-text">
@@ -32,12 +32,10 @@
 </template>
 
 <script>
-import HelloWorld from "@/components/HelloWorld.vue";
 import {mapGetters} from "vuex"
 export default {
   name: "Home",
   components: {
-    HelloWorld,
   },
 
   data() {

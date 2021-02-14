@@ -1,18 +1,18 @@
 
 <template>
-  <div class="genres">
-    <h1>Genres</h1>
+  <div class="search">
+    <h1>Search</h1>
   </div>
 </template>
 
 <script>
 export default {
-    name: "genres"
+    name: "search"
 }
 </script>
 
 <style lang="scss" scoped>
-.genres {
+.search {
   margin-top: 30px;
 }
 </style>

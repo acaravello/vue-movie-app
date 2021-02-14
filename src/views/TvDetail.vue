@@ -14,32 +14,31 @@
                <div class="title-container">
                  
                </div>
-
               
               <div class="inner-content">
-                <h2 class="movie-title">{{title}}</h2>
-                <h4 class="movie-tagline">{{tagline}}</h4>
-              <p class="movie-overview">{{movieDetail.overview}}</p>
+                <h2 class="tv-series-title">{{seriesTitle}}</h2>
+                <h4 class="tv-series-tagline">{{seriesTagline}}</h4>
+              <p class="tv-series-overview">{{tvSeriesDetail.overview}}</p>
 
               <div class="stats-container">
                 <div class="stats-column">
                   <div class="stats-category">
-                    <h5 class="stats-title">Release date:</h5>
-                    <div class="stats-info">{{release_date}}</div>
+                    <h5 class="stats-title">First Air Date:</h5>
+                    <div class="stats-info">{{seriesFirstAirDate}}</div>
                   </div>
-                  <div class="stats-category" v-if="budget && revenue">
-                    <h5 class="stats-title">Budget:</h5>
-                    <div class="stats-info">{{budget}}</div>
+                  <div class="stats-category">
+                    <h5 class="stats-title">Seasons:</h5>
+                    <div class="stats-info">{{seriesSeasons}}</div>
                   </div>
                 </div>
                 <div class="stats-column">
                   <div class="stats-category">
                     <h5 class="stats-title">Vote Average:</h5>
-                    <div class="stats-info">{{vote_average}}</div>
+                    <div class="stats-info">{{seriesVoteAverage}}</div>
                   </div>
-                   <div class="stats-category" v-if="budget && revenue">
-                    <h5 class="stats-title">Revenue:</h5>
-                    <div class="stats-info">{{revenue}}</div>
+                   <div class="stats-category">
+                    <h5 class="stats-title">Episodes:</h5>
+                    <div class="stats-info">{{seriesEpisodes}}</div>
                   </div>
                 </div>
               </div>
@@ -87,42 +86,42 @@ export default {
     computed: {
 
       backdropPath() {
-        return this.$store.getters.backdropPath
+        return this.$store.getters.tvSeriesBackdropPath
       },
 
-      movieDetail() {
-      this.posterPath = `https://image.tmdb.org/t/p/w500` + this.$store.getters.movieDetail.poster_path;
-      return this.$store.getters.movieDetail
+      tvSeriesDetail() {
+      this.posterPath = `https://image.tmdb.org/t/p/w500` + this.$store.getters.tvSeriesDetail.poster_path;
+      return this.$store.getters.tvSeriesDetail
       },
 
-      tagline() {
-        return this.$store.getters.tagline;
+      seriesTagline() {
+        return this.$store.getters.seriesTagline;
       },
 
-      title() {
-        return this.$store.getters.title;
+      seriesTitle() {
+        return this.$store.getters.seriesTitle;
       },
 
-      release_date() {
-        return this.$store.getters.release_date;
+      seriesFirstAirDate() {
+        return this.$store.getters.seriesFirstAirDate;
       },
 
-      vote_average() {
-        return this.$store.getters.vote_average;
+      seriesVoteAverage() {
+        return this.$store.getters.seriesVoteAverage;
       },
 
-      budget() {
-        return this.$store.getters.budget;
+      seriesSeasons() {
+        return this.$store.getters.seriesSeasons;
       },
 
-      revenue() {
-        return this.$store.getters.revenue
+      seriesEpisodes() {
+        return this.$store.getters.seriesEpisodes
       }
 
     },
 
     beforeMount() {
-      this.$store.dispatch("getMovieDetailFromId");
+      this.$store.dispatch("getTvSeriesDetailFromId");
     },
 
     mounted() {
@@ -186,12 +185,12 @@ export default {
               flex-direction: column;
               margin: auto;
 
-              .movie-overview {
+              .tv-series-overview {
               margin: 10px;
               font-size: 15px;
             }
 
-            .movie-tagline {
+            .tv-series-tagline {
               color: #00e67a;
               margin-top: 5px;
             }

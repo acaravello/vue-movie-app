@@ -8,6 +8,7 @@ export default new Vuex.Store({
   
   state: {
 
+    //Movies
     latestMovies: null,
     popularMovies: null,
     movieDetail: null,
@@ -19,12 +20,22 @@ export default new Vuex.Store({
     budget: null,
     revenue: null,
     movieActiveSection: "popular",
+    //Tv Series
+    popularTvSeries: null,
+    tvSeriesDetail:null,
+    tvSeriesBackdropPath: null,
+    seriesTitle: null,
+    seriesTagline: null,
+    seriesFirstAirDate: null,
+    seriesVoteAverage: null,
+    seriesSeasons: null,
+    seriesEpisodes: null,
 
   },
 
   getters: {
 
-
+    //Movies
     latestMovies(state) {
       return state.latestMovies;
     },
@@ -69,10 +80,48 @@ export default new Vuex.Store({
       return state.movieActiveSection;
     },
 
+    //Tv series
+    popularTvSeries(state) {
+      return state.popularTvSeries;
+    },
+
+    tvSeriesDetail(state) {
+      return state.tvSeriesDetail;
+    },
+
+    tvSeriesBackdropPath(state) {
+      return state.tvSeriesBackdropPath;
+    },
+
+    seriesTitle(state) {
+      return state.seriesTitle;
+    },
+
+    seriesTagline(state) {
+      return state.seriesTagline;
+    },
+
+    seriesFirstAirDate(state) {
+      return state.seriesFirstAirDate;
+    },
+
+    seriesVoteAverage(state) {
+      return state.seriesVoteAverage;
+    },
+
+    seriesSeasons(state) {
+      return state.seriesSeasons;
+    },
+
+    seriesEpisodes(state) {
+      return state.seriesEpisodes;
+    }
+
   },
 
   mutations: {
 
+    //Movies
     setLatestMovies(state, userData) {
       state.latestMovies = userData;
     },
@@ -127,10 +176,48 @@ export default new Vuex.Store({
       state.movieActiveSection = userData;
     },
 
+    //Tv Series
+    setPopularTvSeries(state, userData) {
+      state.popularTvSeries = userData;
+    },
+
+    setTvSeriesDetail(state, userData) {
+      state.tvSeriesDetail = userData;
+    },
+
+    setTvSeriesBackdropPath(state, userData) {
+      state.tvSeriesBackdropPath = userData;
+    },
+
+    setSeriesTitle(state, userData) {
+      state.seriesTitle = userData;
+    },
+
+    setSeriesFirstAirDate(state, userData) {
+      state.seriesFirstAirDate = userData;
+    },
+
+    setSeriesVoteAverage(state, userData) {
+      state.seriesVoteAverage = userData;
+    },
+
+    setSeriesSeasons(state, userData) {
+      state.seriesSeasons = userData;
+    },
+
+    setSeriesEpisodes(state, userData) {
+      state.seriesEpisodes = userData;
+    },
+
+    setSeriesTagline(state, userData) {
+      state.seriesTagline = userData;
+    }
+
   },
 
   actions: {
 
+    //Movies
     checkLatestMovies({commit}) {
       const key = process.env.VUE_APP_API_KEY;
       axios
@@ -204,6 +291,65 @@ export default new Vuex.Store({
 
     setMovieActiveSection({commit}, element) {
       commit("setMovieActiveSection", element);
+    },
+
+    //TvSeries
+    checkPopularTvSeries({commit}) {
+      const key = process.env.VUE_APP_API_KEY;
+      axios
+        .get(
+          `https://api.themoviedb.org/3/tv/popular?api_key=${key}&language=en-US&page=1`
+          
+        )
+        .then((response) => {
+          console.log("popular tv series are");
+          console.log(response);
+          commit("setPopularTvSeries", response.data.results)
+        })
+        .catch((error) => {
+          console.log("Error in contacting movie db");
+          console.log(error);
+        });
+    },
+
+    setPopularTvSeries({commit}, element) {
+      commit("setPopularTvSeries", element)
+    },
+
+    setTvSeriesDetail({commit}, element) {
+      commit("setTvSeriesDetail", element);
+      commit("setTvSeriesBackdropPath", element.backdrop_path);
+    },
+
+    getTvSeriesDetailFromId({commit, state}) {
+
+      const key =process.env.VUE_APP_API_KEY;
+
+      //cancel previous data
+      commit("setSeriesTitle", "");
+      commit("setSeriesTagline", "")
+      commit("setSeriesFirstAirDate", "");
+      commit("setSeriesVoteAverage", "");
+      commit("setSeriesSeasons", "");
+      commit("setSeriesEpisodes", "");
+
+      if(state.tvSeriesDetail && state.tvSeriesDetail.id) {
+        axios.get(`https://api.themoviedb.org/3/tv/${state.tvSeriesDetail.id}?api_key=${key}&language=en-US`)
+        .then(response => {
+          console.log("response data");
+          console.log(response.data)
+          commit("setSeriesTitle", response.data.name);
+          commit("setSeriesTagline", response.data.tagline);
+          commit("setSeriesFirstAirDate", response.data.first_air_date);
+          commit("setSeriesVoteAverage", response.data.vote_average);
+          commit("setSeriesSeasons", response.data.number_of_seasons);
+          commit("setSeriesEpisodes", response.data.number_of_episodes);
+        })
+        .catch(error => {
+          console.log("Error in contacting movie db");
+          console.log(error)
+        })
+      }
     },
 
   }

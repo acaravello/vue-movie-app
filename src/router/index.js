@@ -24,19 +24,24 @@ const routes = [
     component: () => import('../views/TvSeries.vue')
   },
   {
-    path: '/genres',
-    name: "Genres",
-    component: () => import('../views/Genres.vue')
-  },
-  {
     path: '/people',
     name: 'People',
     component: () => import('../views/People.vue')
   },
   {
+    path: '/search',
+    name: "Seearch",
+    component: () => import('../views/Search.vue')
+  },
+  {
     path: '/detail',
     name: 'Detail',
     component: () => import ('../views/Detail.vue')
+  },
+  {
+    path: '/series-detail',
+    name: 'SeriesDetail',
+    component: () => import ('../views/TvDetail.vue')
   }
 ]
 

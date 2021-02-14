@@ -2,10 +2,10 @@
   <div id="app">
     <header>
       <div id="nav">
-        <router-link to="/" v-bind:class="$route.path === '/detail' ? 'router-link-exact-active' : null">Movies</router-link>
-        <router-link to="/tv-series" @click.native="resetState">Tv Series</router-link>
-        <router-link to="/genres" @click.native="resetState">Genres</router-link>
+        <router-link to="/" :class="$route.path === '/detail' ? 'router-link-exact-active' : null">Movies</router-link>
+        <router-link to="/tv-series" @click.native="resetState" :class="$route.path === '/series-detail' ? 'router-link-exact-active' : null">Tv Series</router-link>
         <router-link to="/people" @click.native="resetState">People</router-link>
+        <router-link to="/search" @click.native="resetState">Search</router-link>
       </div>
     </header>
 
