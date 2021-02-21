@@ -31,6 +31,9 @@ export default new Vuex.Store({
     seriesSeasons: null,
     seriesEpisodes: null,
 
+    //People
+    popularPeople: null,
+
   },
 
   getters: {
@@ -115,7 +118,13 @@ export default new Vuex.Store({
 
     seriesEpisodes(state) {
       return state.seriesEpisodes;
+    },
+
+    //People
+    popularPeople(state) {
+      return state.popularPeople;
     }
+
 
   },
 
@@ -211,6 +220,11 @@ export default new Vuex.Store({
 
     setSeriesTagline(state, userData) {
       state.seriesTagline = userData;
+    },
+
+    //People
+    setPopularPeople(state, userData) {
+      state.popularPeople = userData;
     }
 
   },
@@ -350,6 +364,29 @@ export default new Vuex.Store({
           console.log(error)
         })
       }
+    },
+
+    //People 
+    checkPopularPeople({commit}) {
+      const key = process.env.VUE_APP_API_KEY;
+      axios
+        .get(
+          `https://api.themoviedb.org/3/person/popular?api_key=${key}&language=en-US&page=1`
+          
+        )
+        .then((response) => {
+          console.log("popular people are");
+          console.log(response);
+          commit("setPopularPeople", response.data.results)
+        })
+        .catch((error) => {
+          console.log("Error in contacting movie db");
+          console.log(error);
+        });
+    },
+
+    setPopularPeople({commit}, element) {
+      commit("setPopularPeople", element)
     },
 
   }
