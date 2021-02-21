@@ -3,7 +3,7 @@
       <div class="people-list-container">
       <div class="cards-container">
         <div class="card" v-for="person in popularPeople" :key="person.id">
-          <img :src="imageRootPath + person.profile_path" class="card-img-top" :alt="person.name" @click="toPersonDetail(person)"/>
+          <img :src="imageRootPath + person.profile_path" class="card-img-top-people" :alt="person.name" @click="toPersonDetail(person)"/>
           <div class="card-body">
             <h5 class="card-title">{{person.name}}</h5>
             <div class=known-for-container>
@@ -124,7 +124,7 @@ export default {
               padding-bottom: 5px;
             }
 
-            img {
+            .card-img-top-people {
               border-radius: 0px;
               cursor: pointer;
               filter: none;
