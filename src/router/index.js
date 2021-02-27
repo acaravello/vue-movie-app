@@ -39,6 +39,11 @@ const routes = [
     path: '/known-for',
     name: 'KnownFor',
     component: () => import ('../views/KnownForDetail.vue')
+  },
+  {
+    path: '/filmography',
+    name: 'Filmography',
+    component: () => import ('../views/Filmography.vue')
   }
 ]
 

@@ -40,12 +40,22 @@
                 </div>
               </div>
 
+              <div class="buttons-container">
+                <div class="filmography-container">
+                <a @click="goToFilmography">
+                  <back-icon />
+                  <span class="link-text">Filmography</span>
+              </a>
+              </div>
+
                <div class="back-container">
                 <a @click="goBack">
                   <back-icon />
                   <span class="link-text">Back</span>
               </a>
               </div>
+              </div>
+              
 
               </div>
              </div>
@@ -77,9 +87,6 @@ export default {
       this.posterPath = `https://image.tmdb.org/t/p/w500` + this.$store.getters.actorSelected.profile_path;
       return this.$store.getters.knownForDetail;
     },
-    knownForCredits() {
-      return this.$store.getters.knownForCredits;
-    },
 
     backdropPath() {
         return this.$store.getters.knownForBackdropPath
@@ -87,10 +94,9 @@ export default {
   }, 
 
   methods: {
-
-    toMovieDetail(movie) {
-      this.$store.dispatch("setMovieDetail", movie)
-      this.$router.push({path: "/detail"})
+    goToFilmography() {
+      console.log("Going to filmography")
+      this.$router.push({path: "/filmography"})
     },
 
     goBack()  {
@@ -113,7 +119,6 @@ export default {
 
   beforeMount() {
     this.$store.dispatch("checkActorSelectedData");
-    this.$store.dispatch("checkActorSelectedCredits");
   },
 
   mounted() {
@@ -128,15 +133,10 @@ export default {
 <style lang="scss" scoped>
 .known-for {
 
-  // margin-top: 30px;
-
-  
-  
   .known-for-detail-container {
     background: no-repeat #000;
     background-size: cover;
     min-height: calc(100vh- 145px);
-
 
   .inner-container {
      min-height: calc(100vh - 145px);
@@ -210,8 +210,46 @@ export default {
 
       }
 
+  .buttons-container {
 
-   .back-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: -30px;
+
+    .filmography-container {
+        display: flex;
+        margin-top: 30px;
+        margin-right: 20px;
+        text-transform: uppercase;
+        opacity: 1;
+        transition: opacity 0.8s ease;
+
+        &:hover {
+          opacity: 0.8;
+        }
+
+       a {
+         border: 1px solid #00e67a;
+         padding: .475rem .95rem;
+         line-height: 20px;
+         border-radius: .25rem;
+         font-size: 0.8rem;
+         color: #00e67a;
+         cursor: pointer;
+
+            svg {
+            width:15px;
+            height: auto;
+            fill: #00e67a;
+            margin-right: 8px;
+            margin-bottom: 3px;
+            }
+          }
+    }
+
+    .back-container {
+      display: flex;
       margin-top: 30px;
       text-transform: uppercase;
       opacity: 1;
@@ -230,18 +268,19 @@ export default {
          color: #00e67a;
          cursor: pointer;
 
-          svg {
-          width:15px;
-          height: auto;
-          fill: #00e67a;
-          margin-right: 8px;
-          margin-bottom: 3px;
+            svg {
+            width:15px;
+            height: auto;
+            fill: #00e67a;
+            margin-right: 8px;
+            margin-bottom: 3px;
+            }
+          }
         }
-       }
-      
+      }
+
     }
   }
-}
 
 }
 </style>

@@ -447,16 +447,6 @@ export default new Vuex.Store({
         .then((response) => {
           console.log("known for details are");
           console.log(response.data);
-          for(let el in response.data.cast) {
-            if(response.data.cast[el].media_type === "movie") {
-              // console.log(response.data.cast[el].title)
-              // console.log(response.data.cast[el].release_date)
-            } else {
-              // console.log(response.data.cast[el].name)
-              // console.log(response.data.cast[el].first_air_date)
-            }
-            
-          }
           commit("setKnownForDetail", response.data)
         })
         .catch((error) => {
@@ -477,15 +467,7 @@ export default new Vuex.Store({
         )
         .then((response) => {
           console.log("known for credits are");
-          console.log(response);
-          for(let el in response.data.cast) {
-            if(response.data.cast[el].media_type === "movie") {
-              //logic for movies
-            } else {
-              //logic for tv series
-            }
-            
-          }
+          console.log(response.data.cast);
           commit("setKnownForCredits", response.data.cast)
         })
         .catch((error) => {
