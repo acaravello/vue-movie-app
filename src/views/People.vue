@@ -56,10 +56,16 @@ export default {
   methods: {
 
     toPersonDetail(person) {
-      console.log("To Person Detail")
+      console.log("Setting actor selected");
+      console.log(person)
+      this.$store.dispatch("setActorSelected", person)
+      const randomIndex = Math.floor(Math.random() * person.known_for.length);
+      this.$store.dispatch("setKnownForBackdropPath", person.known_for[randomIndex].backdrop_path);
+      this.$router.push({path: "/known-for"})
     },
     
     toElementDetail(element) {
+      this.$store.dispatch("setKnownForActive", true);
       switch(element.media_type) {
         case 'movie':
           this.$store.dispatch("setMovieDetail", element)

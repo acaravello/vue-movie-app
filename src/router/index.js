@@ -34,6 +34,11 @@ const routes = [
     path: '/series-detail',
     name: 'SeriesDetail',
     component: () => import ('../views/TvDetail.vue')
+  },
+  {
+    path: '/known-for',
+    name: 'KnownFor',
+    component: () => import ('../views/KnownForDetail.vue')
   }
 ]
 

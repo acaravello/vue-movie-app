@@ -2,9 +2,9 @@
   <div id="app">
     <header>
       <div id="nav">
-        <router-link to="/" :class="$route.path === '/detail' ? 'router-link-exact-active' : null">Movies</router-link>
-        <router-link to="/tv-series" @click.native="resetState" :class="$route.path === '/series-detail' ? 'router-link-exact-active' : null">Tv Series</router-link>
-        <router-link to="/people" @click.native="resetState">People</router-link>
+        <router-link to="/" :class="$route.path === '/detail' && !knownForActive ? 'router-link-exact-active' : null">Movies</router-link>
+        <router-link to="/tv-series" @click.native="resetState" :class="$route.path === '/series-detail' && !knownForActive ? 'router-link-exact-active' : null">Tv Series</router-link>
+        <router-link to="/people" @click.native="resetState" :class="$route.path === '/known-for' || knownForActive ? 'router-link-exact-active' : null">People</router-link>
         <router-link to="/search" @click.native="resetState">Search</router-link>
       </div>
     </header>
@@ -20,12 +20,17 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex";
 export default {
   methods: {
     resetState() {
-      this.$store.dispatch("setMovieActiveSection", "popular")
+      this.$store.dispatch("setMovieActiveSection", "popular");
+      this.$store.dispatch("setKnownForActive", false)
     }
-  }
+  },
+   computed: mapGetters({
+    knownForActive: "knownForActive",
+  }),
 };
 </script>
 

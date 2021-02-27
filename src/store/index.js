@@ -33,7 +33,11 @@ export default new Vuex.Store({
 
     //People
     popularPeople: null,
-
+    knownForActive: false,
+    knownForDetail: null,
+    knownForCredits: null,
+    actorSelected: null,
+    knownForBackdropPath: null,
   },
 
   getters: {
@@ -123,8 +127,27 @@ export default new Vuex.Store({
     //People
     popularPeople(state) {
       return state.popularPeople;
-    }
+    },
 
+    knownForActive(state) {
+      return state.knownForActive;
+    },
+
+    knownForDetail(state) {
+      return state.knownForDetail;
+    },
+
+    knownForCredits(state) {
+      return state.knownForCredits;
+    },
+
+    actorSelected(state) {
+      return state.actorSelected;
+    },
+
+    knownForBackdropPath(state) {
+      return state.knownForBackdropPath;
+    }
 
   },
 
@@ -225,6 +248,26 @@ export default new Vuex.Store({
     //People
     setPopularPeople(state, userData) {
       state.popularPeople = userData;
+    },
+
+    setKnownForActive(state, userData) {
+      state.knownForActive = userData;
+    },
+
+    setKnownForDetail(state, userData) {
+      state.knownForDetail = userData;
+    },
+
+    setKnownForCredits(state, userData) {
+      state.knownForCredits = userData;
+    },
+
+    setActorSelected(state, userData) {
+      state.actorSelected = userData;
+    },
+
+    setKnownForBackdropPath(state, userData) {
+      state.knownForBackdropPath = userData;
     }
 
   },
@@ -388,6 +431,80 @@ export default new Vuex.Store({
     setPopularPeople({commit}, element) {
       commit("setPopularPeople", element)
     },
+
+    setKnownForActive({commit}, element) {
+      commit("setKnownForActive", element)
+    },
+
+    checkActorSelectedData({commit, state}) {
+      const key = process.env.VUE_APP_API_KEY;
+      if(state.actorSelected && state.actorSelected.id) {
+        axios
+        .get(
+          `https://api.themoviedb.org/3/person/${state.actorSelected.id}?api_key=${key}&language=en-US`
+          
+        )
+        .then((response) => {
+          console.log("known for details are");
+          console.log(response.data);
+          for(let el in response.data.cast) {
+            if(response.data.cast[el].media_type === "movie") {
+              // console.log(response.data.cast[el].title)
+              // console.log(response.data.cast[el].release_date)
+            } else {
+              // console.log(response.data.cast[el].name)
+              // console.log(response.data.cast[el].first_air_date)
+            }
+            
+          }
+          commit("setKnownForDetail", response.data)
+        })
+        .catch((error) => {
+          console.log("Error in contacting movie db");
+          console.log(error);
+        });
+      }
+      
+    },
+
+    checkActorSelectedCredits({commit, state}) {
+      const key = process.env.VUE_APP_API_KEY;
+      if(state.actorSelected && state.actorSelected.id) {
+        axios
+        .get(
+          `https://api.themoviedb.org/3/person/${state.actorSelected.id}/combined_credits?api_key=${key}&language=en-US`
+          
+        )
+        .then((response) => {
+          console.log("known for credits are");
+          console.log(response);
+          for(let el in response.data.cast) {
+            if(response.data.cast[el].media_type === "movie") {
+              //logic for movies
+            } else {
+              //logic for tv series
+            }
+            
+          }
+          commit("setKnownForCredits", response.data.cast)
+        })
+        .catch((error) => {
+          console.log("Error in contacting movie db");
+          console.log(error);
+        });
+      }
+      
+    },
+
+    setActorSelected({commit}, element) {
+        commit("setKnownForDetail", "");
+        commit("setKnownForCredits", "");
+        commit("setActorSelected", element);
+    },
+
+    setKnownForBackdropPath({commit}, element) {
+      commit("setKnownForBackdropPath", element)
+    }
 
   }
 })
