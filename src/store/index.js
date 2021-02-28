@@ -38,6 +38,9 @@ export default new Vuex.Store({
     knownForCredits: null,
     actorSelected: null,
     knownForBackdropPath: null,
+
+    //Search
+    searchActiveSection: "movies",
   },
 
   getters: {
@@ -147,6 +150,11 @@ export default new Vuex.Store({
 
     knownForBackdropPath(state) {
       return state.knownForBackdropPath;
+    },
+
+    //Search
+    searchActiveSection(state) {
+      return state.searchActiveSection
     }
 
   },
@@ -268,7 +276,12 @@ export default new Vuex.Store({
 
     setKnownForBackdropPath(state, userData) {
       state.knownForBackdropPath = userData;
-    }
+    },
+
+    //Search
+    setSearchActiveSection(state, userData) {
+      state.searchActiveSection = userData;
+    },
 
   },
 
@@ -491,7 +504,7 @@ export default new Vuex.Store({
             }
 
             return date1 - date2;
-            
+
           }).reverse();
           
           commit("setKnownForCredits", responseDataFiltered)
@@ -511,7 +524,12 @@ export default new Vuex.Store({
     },
 
     setKnownForBackdropPath({commit}, element) {
-      commit("setKnownForBackdropPath", element)
+      commit("setKnownForBackdropPath", element);
+    },
+
+    //Search
+    setSearchActiveSection({commit}, element) {
+      commit("setSearchActiveSection", element);
     }
 
   }

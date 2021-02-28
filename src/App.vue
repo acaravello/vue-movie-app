@@ -25,7 +25,8 @@ export default {
   methods: {
     resetState() {
       this.$store.dispatch("setMovieActiveSection", "popular");
-      this.$store.dispatch("setKnownForActive", false)
+      this.$store.dispatch("setKnownForActive", false);
+      this.$store.dispatch("setSearchActiveSection", "movies");
     }
   },
    computed: mapGetters({
