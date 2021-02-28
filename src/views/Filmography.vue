@@ -1,12 +1,12 @@
 <template>
-  <div class="fimography">
-    <div class="fimography-list-container">
+  <div class="filmography">
+    <div class="filmography-list-container">
         <h1>{{knownForDetail && knownForDetail.name}}</h1>
       <div class="cards-container">
         <div class="card" v-for="element in knownForCredits" :key="element.credit_id" @click="toElementDetail(element)">
           <img :src="imageRootPath + element.poster_path" class="card-img-top" :alt="element.name" />
           <div class="card-body">
-            <h5 class="card-title">{{element.title}}</h5>
+            <h5 class="card-title">{{element.media_type==="movie" ? element.title : element.name}}</h5>
             <p class="card-text">
               {{element.overview}}
             </p>
@@ -19,7 +19,7 @@
 
 <script>
 export default {
-    name: "fimography",
+    name: "filmography",
     data() {
     return {
       imageRootPath: "https://image.tmdb.org/t/p/original",
@@ -63,14 +63,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.fimography {
+.filmography {
   margin-top: 30px;
 
-  .fimography-list-container {
+  .filmography-list-container {
     display: flex;
     justify-content: center;
     flex-direction: column;
     margin: 48px auto 24px auto;
+
+    h1 {
+      margin-bottom: 36px;
+    }
 
     .button-container {
       width: 200px;

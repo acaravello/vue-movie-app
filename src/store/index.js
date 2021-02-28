@@ -468,7 +468,22 @@ export default new Vuex.Store({
         .then((response) => {
           console.log("known for credits are");
           console.log(response.data.cast);
-          commit("setKnownForCredits", response.data.cast)
+
+          let responseDataFiltered = [...response.data.cast];
+          for(let i = 0; i < responseDataFiltered.length; i++) {
+            console.log(responseDataFiltered[i].title)
+            console.log(responseDataFiltered[i].poster_path)
+            console.log(!responseDataFiltered[i].poster_path)
+            if(!responseDataFiltered[i].poster_path || responseDataFiltered[i].character.toLowerCase().indexOf("self") !== -1
+             || responseDataFiltered[i].character === "") {
+              responseDataFiltered.splice(i, 1);
+              i--;
+            }
+          }
+          console.log("Response data filtered");
+          console.log(responseDataFiltered)
+          
+          commit("setKnownForCredits", responseDataFiltered)
         })
         .catch((error) => {
           console.log("Error in contacting movie db");

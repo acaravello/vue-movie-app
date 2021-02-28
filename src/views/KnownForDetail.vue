@@ -43,7 +43,7 @@
               <div class="buttons-container">
                 <div class="filmography-container">
                 <a @click="goToFilmography">
-                  <back-icon />
+                  <filmography-icon />
                   <span class="link-text">Filmography</span>
               </a>
               </div>
@@ -68,11 +68,13 @@
 </template>
 
 <script>
-import BackIcon from '../assets/icons/backIcon.vue'
+import BackIcon from '../assets/icons/backIcon.vue';
+import FilmographyIcon from "../assets/icons/filmographyIcon.vue";
 export default {
   name: "known-for",
   components: {
-    BackIcon
+    BackIcon,
+    FilmographyIcon
   },
 
   data() {
@@ -244,6 +246,14 @@ export default {
             fill: #00e67a;
             margin-right: 8px;
             margin-bottom: 3px;
+            }
+
+            .filmography {
+              width: 13px;
+              height: auto;
+              fill: #00e67a;
+              margin-right: 8px;
+              margin-bottom: 5px;
             }
           }
     }

@@ -4,7 +4,7 @@
       <div id="nav">
         <router-link to="/" :class="$route.path === '/detail' && !knownForActive ? 'router-link-exact-active' : null">Movies</router-link>
         <router-link to="/tv-series" @click.native="resetState" :class="$route.path === '/series-detail' && !knownForActive ? 'router-link-exact-active' : null">Tv Series</router-link>
-        <router-link to="/people" @click.native="resetState" :class="$route.path === '/known-for' || $route.path === 'filmography' || knownForActive ? 'router-link-exact-active' : null">People</router-link>
+        <router-link to="/people" @click.native="resetState" :class="$route.path === '/known-for' || $route.path === '/filmography' || knownForActive ? 'router-link-exact-active' : null">People</router-link>
         <router-link to="/search" @click.native="resetState">Search</router-link>
       </div>
     </header>
