@@ -7,6 +7,10 @@
           <img :src="imageRootPath + element.poster_path" class="card-img-top" :alt="element.name" />
           <div class="card-body">
             <h5 class="card-title">{{element.media_type==="movie" ? element.title : element.name}}</h5>
+            <div class="credit-element-info">
+              <div class="role-name">{{element.character}}</div>
+              <div class="year">{{getYear(element)}}</div>
+            </div>
             <p class="card-text">
               {{element.overview}}
             </p>
@@ -52,7 +56,14 @@ export default {
           this.$store.dispatch("setTvSeriesDetail", element)
           this.$router.push({path: "/series-detail"})
       }
-    }
+    },
+    getYear(element) {
+        if(element.media_type==='movie') {
+          return element.release_date.substr(0, 4);
+        } else {
+          return element.first_air_date.substr(0, 4);
+        }
+      },
   },
 
 }
@@ -123,6 +134,18 @@ export default {
               background: #35495E;
               background: -webkit-linear-gradient(to top, #00b35f, #35495E);
               background: linear-gradient(to top, #00b35f, #35495E);
+
+              .credit-element-info {
+                margin-bottom: 10px;
+
+                .role-name {
+                  margin-bottom: 2px;
+                }
+
+                .year {
+                  font-size: 13px;
+                }
+              }
 
               .card-text {
               font-size: 13px;

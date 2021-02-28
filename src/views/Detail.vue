@@ -21,9 +21,9 @@
                 <h4 class="movie-tagline">{{tagline}}</h4>
               <p class="movie-overview">{{movieDetail.overview}}</p>
 
-              <div class="stats-container">
+              <div class="stats-container" :class="{center: !budget && !revenue && !vote_average || vote_average === 0}">
                 <div class="stats-column">
-                  <div class="stats-category">
+                  <div class="stats-category" v-if="release_date">
                     <h5 class="stats-title">Release date:</h5>
                     <div class="stats-info">{{release_date}}</div>
                   </div>
@@ -33,7 +33,7 @@
                   </div>
                 </div>
                 <div class="stats-column">
-                  <div class="stats-category">
+                  <div class="stats-category" v-if="vote_average && vote_average > 0">
                     <h5 class="stats-title">Vote Average:</h5>
                     <div class="stats-info">{{vote_average}}</div>
                   </div>
@@ -201,6 +201,10 @@ export default {
               display: flex;
               flex-direction: row;
               justify-content: space-around;
+
+              &.center {
+                justify-content: center;
+              }
 
               .stats-column {
                 display: flex;

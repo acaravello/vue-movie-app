@@ -314,19 +314,17 @@ export default new Vuex.Store({
     setMovieDetail({commit}, element) {
       commit("setMovieDetail", element);
       commit("setBackdropPath", element.backdrop_path);
-    },
-
-    getMovieDetailFromId({commit, state}) {
-
-      const key =process.env.VUE_APP_API_KEY;
-
       //cancel previous data
       commit("setTagline", "");
       commit("setTitle", "");
       commit("setVoteAverage", "");
       commit("setBudget", null),
       commit("setRevenue", null)
+    },
 
+    getMovieDetailFromId({commit, state}) {
+
+      const key =process.env.VUE_APP_API_KEY;
       if(state.movieDetail && state.movieDetail.id) {
         axios.get(`https://api.themoviedb.org/3/movie/${state.movieDetail.id}?api_key=${key}&language=en-US`)
         .then(response => {
@@ -376,12 +374,6 @@ export default new Vuex.Store({
     setTvSeriesDetail({commit}, element) {
       commit("setTvSeriesDetail", element);
       commit("setTvSeriesBackdropPath", element.backdrop_path);
-    },
-
-    getTvSeriesDetailFromId({commit, state}) {
-
-      const key =process.env.VUE_APP_API_KEY;
-
       //cancel previous data
       commit("setSeriesTitle", "");
       commit("setSeriesTagline", "")
@@ -389,7 +381,11 @@ export default new Vuex.Store({
       commit("setSeriesVoteAverage", "");
       commit("setSeriesSeasons", "");
       commit("setSeriesEpisodes", "");
+    },
 
+    getTvSeriesDetailFromId({commit, state}) {
+
+      const key =process.env.VUE_APP_API_KEY;
       if(state.tvSeriesDetail && state.tvSeriesDetail.id) {
         axios.get(`https://api.themoviedb.org/3/tv/${state.tvSeriesDetail.id}?api_key=${key}&language=en-US`)
         .then(response => {
@@ -479,6 +475,24 @@ export default new Vuex.Store({
           }
           console.log("Response data filtered");
           console.log(responseDataFiltered)
+
+          responseDataFiltered.sort((el1, el2) => {
+
+            let date1, date2;
+            if(el1.release_date  || el1.first_air_date) {
+              date1 = new Date(el1.media_type==="movie" ? el1.release_date : el1.first_air_date);
+            } else {
+              date1 = 0;
+            }
+            if(el2.release_date || el2.first_air_date) {
+              date2 = new Date(el2.media_type === "movie" ? el2.release_date : el2.first_air_date);
+            } else {
+              date2 = 0;
+            }
+
+            return date1 - date2;
+            
+          }).reverse();
           
           commit("setKnownForCredits", responseDataFiltered)
         })

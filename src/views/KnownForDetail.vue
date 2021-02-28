@@ -97,7 +97,6 @@ export default {
 
   methods: {
     goToFilmography() {
-      console.log("Going to filmography")
       this.$router.push({path: "/filmography"})
     },
 

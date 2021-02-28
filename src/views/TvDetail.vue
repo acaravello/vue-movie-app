@@ -22,21 +22,21 @@
 
               <div class="stats-container">
                 <div class="stats-column">
-                  <div class="stats-category">
+                  <div class="stats-category" v-if="seriesFirstAirDate">
                     <h5 class="stats-title">First Air Date:</h5>
                     <div class="stats-info">{{seriesFirstAirDate}}</div>
                   </div>
-                  <div class="stats-category">
+                  <div class="stats-category" v-if="seriesSeasons">
                     <h5 class="stats-title">Seasons:</h5>
                     <div class="stats-info">{{seriesSeasons}}</div>
                   </div>
                 </div>
                 <div class="stats-column">
-                  <div class="stats-category">
+                  <div class="stats-category" v-if="seriesVoteAverage && seriesVoteAverage > 0">
                     <h5 class="stats-title">Vote Average:</h5>
                     <div class="stats-info">{{seriesVoteAverage}}</div>
                   </div>
-                   <div class="stats-category">
+                   <div class="stats-category" v-if="seriesEpisodes">
                     <h5 class="stats-title">Episodes:</h5>
                     <div class="stats-info">{{seriesEpisodes}}</div>
                   </div>
