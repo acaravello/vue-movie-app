@@ -77,9 +77,6 @@ export default {
       }
     }
   },
-  beforeMount() {
-    this.$store.dispatch("checkPopularPeople");
-  },
 
 }
 </script>

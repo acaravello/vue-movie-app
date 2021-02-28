@@ -35,9 +35,6 @@ export default {
        this.$router.push({path: "/series-detail"})
     }
   },
-  beforeMount() {
-    this.$store.dispatch("checkPopularTvSeries");
-  }
 
 }
 </script>

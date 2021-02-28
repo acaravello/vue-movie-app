@@ -55,10 +55,6 @@ export default {
     }
   },
 
-  beforeMount() {
-      this.$store.dispatch("checkActorSelectedCredits");
-  }
-
 }
 </script>
 

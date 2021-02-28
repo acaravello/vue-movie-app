@@ -31,6 +31,13 @@ export default {
    computed: mapGetters({
     knownForActive: "knownForActive",
   }),
+
+  beforeMount() {
+    this.$store.dispatch("checkLatestMovies");
+    this.$store.dispatch("checkPopularMovies");
+    this.$store.dispatch("checkPopularTvSeries");
+    this.$store.dispatch("checkPopularPeople");
+  }
 };
 </script>
 

@@ -70,10 +70,6 @@ export default {
     }
   },
 
-  beforeMount() {
-    this.$store.dispatch("checkLatestMovies");
-    this.$store.dispatch("checkPopularMovies");
-  }
   
 };
 </script>

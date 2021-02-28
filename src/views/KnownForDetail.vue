@@ -121,6 +121,7 @@ export default {
 
   beforeMount() {
     this.$store.dispatch("checkActorSelectedData");
+    this.$store.dispatch("checkActorSelectedCredits");
   },
 
   mounted() {
