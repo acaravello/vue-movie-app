@@ -7,7 +7,9 @@
     </div>
     <div class="search-list-container">
       <div class="cards-container" v-if="searchActiveSection === 'movies'">
-        Search for a Movie
+        <div class="search-wrapper">
+            <input class="search-input" id="movie-search" placeholder="Search for a movie" v-model="movieInput" :keyup="finishedTyping()"/> 
+        </div> 
       </div>
        <div class="cards-container" v-if="searchActiveSection === 'tv'">
        Search for a Tv series
@@ -30,6 +32,8 @@ export default {
 
     return {
       imageRootPath: "https://image.tmdb.org/t/p/original",
+      movieInput: "",
+      timer: null,
     };
   },
   
@@ -60,8 +64,23 @@ export default {
         this.$store.dispatch("setSearchActiveSection", "people")
       }
     },
+
+    searchForAMovie() {
+      console.log("Searching for a movie")
+    },
+
+    finishedTyping() {
+      window.clearTimeout(this.timeout);
+      this.timeout = window.setTimeout(() => {
+        if(this.movieInput.length > 2) {
+          console.log("Finished typing");
+          console.log("searching for " + this.movieInput)
+        }
+      }, 1500)
+    }
    
   },
+
 
 };
 </script>
@@ -70,6 +89,34 @@ export default {
 
 .search {
   margin-top: 30px;
+
+  .search-wrapper {
+    overflow: hidden;
+    border-bottom: 1px solid #00E67A;
+    width: 100%;
+    max-width: 860px;
+    margin-left: 40px;
+    margin-right: 40px;
+
+     .search-input {
+      width: 100%;
+      height: 56px;
+      line-height: 22px;
+      padding: 0 18px;
+      background-color: transparent;
+      overflow: hidden;
+      color: #00E67A;
+      border:none;
+      font-size: 18px;
+      letter-spacing: 0.5px;
+      font-weight: 300;
+    }
+
+    input:focus {
+      outline: none;
+    }
+
+  }
 
   .selector-container {
     display: flex;

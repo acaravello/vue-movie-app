@@ -59,9 +59,13 @@ export default {
     },
     getYear(element) {
         if(element.media_type==='movie') {
-          return element.release_date.substr(0, 4);
+          if(element.release_date) {
+            return element.release_date.substr(0, 4);
+          }
         } else {
-          return element.first_air_date.substr(0, 4);
+          if(element.first_air_date) {
+            return element.first_air_date.substr(0, 4);
+          }
         }
       },
   },
