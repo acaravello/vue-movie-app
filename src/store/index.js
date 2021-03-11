@@ -42,7 +42,11 @@ export default new Vuex.Store({
     //Search
     searchActiveSection: "movies",
     searchListVisible: false,
-    searchListRetrieved: null
+    searchListRetrieved: null,
+    searchListTvVisible: false,
+    searchListTvRetrieved: null,
+    searchListPeopleVisible: false,
+    searchListPeopleRetrieved: null
   },
 
   getters: {
@@ -165,6 +169,22 @@ export default new Vuex.Store({
 
     searchListRetrieved(state) {
       return state.searchListRetrieved
+    },
+
+    searchListTvVisible(state) {
+      return state.searchListTvVisible
+    },
+
+    searchListTvRetrieved(state) {
+      return state.searchListTvRetrieved
+    },
+
+    searchListPeopleVisible(state) {
+      return state.searchListPeopleVisible
+    },
+
+    searchListPeopleRetrieved(state) {
+      return state.searchListPeopleRetrieved
     }
 
   },
@@ -299,6 +319,22 @@ export default new Vuex.Store({
 
     setSearchListRetrieved(state, userData) {
       state.searchListRetrieved = userData
+    },
+
+    setSearchListTvVisible(state, userData) {
+      state.searchListTvVisible = userData;
+    },
+
+    setSearchListTvRetrieved(state, userData) {
+      state.searchListTvRetrieved = userData
+    },
+
+    setSearchListPeopleVisible(state, userData) {
+      state.searchListPeopleVisible = userData;
+    },
+
+    setSearchListPeopleRetrieved(state, userData) {
+      state.searchListPeopleRetrieved = userData
     }
 
   },
@@ -550,17 +586,37 @@ export default new Vuex.Store({
       commit("setSearchActiveSection", element);
     },
 
-    resetSearchList({commit}) {
+    resetSearchLists({commit}) {
       commit("setSearchListVisible", false);
-      commit("setSearchListRetrieved", null)
+      commit("setSearchListRetrieved", null);
+      commit("setSearchListTvVisible", false);
+      commit("setSearchListTvRetrieved", null);
+      commit("setSearchListPeopleVisible", false);
+      commit("setSearchListPeopleRetrieved", null)
     },
 
     setSearchListVisible({commit}, element) {
       commit("setSearchListVisible", element)
     },
 
+    setSearchListTvVisible({commit}, element) {
+      commit("setSearchListTvVisible", element)
+    },
+
+    setSearchListPeopleVisible({commit}, element) {
+      commit("setSearchListPeopleVisible", element)
+    },
+
     setSearchListRetrieved({commit}, element) {
       commit("setSearchListRetrieved", element)
+    },
+
+    setSearchListTvRetrieved({commit}, element) {
+      commit("setSearchListTvRetrieved", element)
+    },
+
+    setSearchListPeopleRetrieved({commit}, element) {
+      commit("setSearchListPeopleRetrieved", element)
     },
 
     checkSearchListMovies({commit}, element) {
@@ -574,13 +630,59 @@ export default new Vuex.Store({
           console.log("search list movies are");
           console.log(response.data.results)
           let responseDataFiltered = [...response.data.results];
-          for(let i = 0; i < responseDataFiltered.length; i++) {
-            if(!responseDataFiltered[i].poster_path || responseDataFiltered[i].release_date.length === 0) {
-              responseDataFiltered.splice(i, 1);
-              i--;
+            for(let i = 0; i < responseDataFiltered.length; i++) {
+              if(!responseDataFiltered[i].poster_path || !responseDataFiltered[i].release_date || responseDataFiltered[i].release_date.length === 0) {
+                responseDataFiltered.splice(i, 1);
+                i--;
+              }
             }
-          }
           commit("setSearchListRetrieved", responseDataFiltered);
+        })
+        .catch((error) => {
+          console.log("Error in contacting movie db");
+          console.log(error);
+        });
+    },
+
+    checkSearchListTv({commit}, element) {
+      const key = process.env.VUE_APP_API_KEY;
+      console.log("Searching for")
+      axios
+        .get(
+          `https://api.themoviedb.org/3/search/tv?api_key=${key}&language=en-US&query=${element}&page=1`
+          
+        )
+
+        .then((response) => {
+          console.log("search list tv are");
+          console.log(response.data.results)
+          let responseDataFiltered = [...response.data.results];
+            for(let i = 0; i < responseDataFiltered.length; i++) {
+              if(!responseDataFiltered[i].poster_path || ! responseDataFiltered[i].first_air_date || responseDataFiltered[i].first_air_date.length === 0) {
+                responseDataFiltered.splice(i, 1);
+                i--;
+              }
+            }
+          commit("setSearchListTvRetrieved", responseDataFiltered);
+        })
+        .catch((error) => {
+          console.log("Error in contacting movie db");
+          console.log(error);
+        });
+    },
+
+    checkSearchListPeople({commit}, element) {
+      const key = process.env.VUE_APP_API_KEY;
+      axios
+        .get(
+          `https://api.themoviedb.org/3/search/person?api_key=${key}&language=en-US&query=${element}&page=1`
+          
+        )
+        .then((response) => {
+          console.log("search list people are");
+          console.log(response.data.results)
+          let responseDataFiltered = [...response.data.results];
+          commit("setSearchListPeopleRetrieved", responseDataFiltered);
         })
         .catch((error) => {
           console.log("Error in contacting movie db");
