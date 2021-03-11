@@ -41,6 +41,8 @@ export default new Vuex.Store({
 
     //Search
     searchActiveSection: "movies",
+    searchListVisible: false,
+    searchListRetrieved: null
   },
 
   getters: {
@@ -155,6 +157,14 @@ export default new Vuex.Store({
     //Search
     searchActiveSection(state) {
       return state.searchActiveSection
+    },
+    
+    searchListVisible(state) {
+      return state.searchListVisible
+    },
+
+    searchListRetrieved(state) {
+      return state.searchListRetrieved
     }
 
   },
@@ -282,6 +292,14 @@ export default new Vuex.Store({
     setSearchActiveSection(state, userData) {
       state.searchActiveSection = userData;
     },
+
+    setSearchListVisible(state, userData) {
+      state.searchListVisible = userData;
+    },
+
+    setSearchListRetrieved(state, userData) {
+      state.searchListRetrieved = userData
+    }
 
   },
 
@@ -530,7 +548,45 @@ export default new Vuex.Store({
     //Search
     setSearchActiveSection({commit}, element) {
       commit("setSearchActiveSection", element);
-    }
+    },
+
+    resetSearchList({commit}) {
+      commit("setSearchListVisible", false);
+      commit("setSearchListRetrieved", null)
+    },
+
+    setSearchListVisible({commit}, element) {
+      commit("setSearchListVisible", element)
+    },
+
+    setSearchListRetrieved({commit}, element) {
+      commit("setSearchListRetrieved", element)
+    },
+
+    checkSearchListMovies({commit}, element) {
+      const key = process.env.VUE_APP_API_KEY;
+      axios
+        .get(
+          `https://api.themoviedb.org/3/search/movie?api_key=${key}&language=en-US&query=${element}&page=1`
+          
+        )
+        .then((response) => {
+          console.log("search list movies are");
+          console.log(response.data.results)
+          let responseDataFiltered = [...response.data.results];
+          for(let i = 0; i < responseDataFiltered.length; i++) {
+            if(!responseDataFiltered[i].poster_path || responseDataFiltered[i].release_date.length === 0) {
+              responseDataFiltered.splice(i, 1);
+              i--;
+            }
+          }
+          commit("setSearchListRetrieved", responseDataFiltered);
+        })
+        .catch((error) => {
+          console.log("Error in contacting movie db");
+          console.log(error);
+        });
+    },
 
   }
 })
