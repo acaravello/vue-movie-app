@@ -88,8 +88,11 @@ export default {
     return {
       imageRootPath: "https://image.tmdb.org/t/p/original",
       movieInput: "",
+      movieInputSearched: "",
       tvInput: "",
+      tvInputSearched: "",
       peopleInput: "",
+      peopleInputSearched: "",
       timer: null,
        getYear(element) {
           if(element.release_date) {
@@ -141,7 +144,9 @@ export default {
         this.$store.dispatch("setSearchListTvRetrieved", null);
         this.$store.dispatch("setSearchListPeopleRetrieved", null);
         this.tvInput = "";
+        this.tvInputSearched = "";
         this.peopleInput = "";
+        this.peopleInputSearched = "";
       }
     },
 
@@ -151,7 +156,9 @@ export default {
         this.$store.dispatch("setSearchListRetrieved", null);
         this.$store.dispatch("setSearchListPeopleRetrieved", null);
         this.movieInput = "";
+        this.movieInputSearched = "";
         this.peopleInput = "";
+        this.peopleInputSearched = "";
       }
     },
 
@@ -161,7 +168,9 @@ export default {
         this.$store.dispatch("setSearchListRetrieved", null);
          this.$store.dispatch("setSearchListTvRetrieved", null);
          this.movieInput = "";
+         this.movieInputSearched = "";
          this.tvInput = "";
+         this.tvInputSearched = "";
       }
     },
 
@@ -169,8 +178,12 @@ export default {
       window.clearTimeout(this.timeout);
       this.timeout = window.setTimeout(() => {
         if(this.movieInput.length > 2) {
-          this.$store.dispatch("setSearchListVisible", true)
-          this.$store.dispatch("checkSearchListMovies", this.movieInput)
+          if(this.movieInput !== this.movieInputSearched) {
+            this.$store.dispatch("setSearchListVisible", true)
+            this.$store.dispatch("checkSearchListMovies", this.movieInput);
+            this.movieInputSearched = this.movieInput;
+          }
+          
         }
       }, 1500)
     },
@@ -179,8 +192,11 @@ export default {
       window.clearTimeout(this.timeout);
       this.timeout = window.setTimeout(() => {
         if(this.tvInput.length > 2) {
-          this.$store.dispatch("setSearchListTvVisible", true)
-          this.$store.dispatch("checkSearchListTv", this.tvInput)
+          if(this.tvInput !== this.tvInputSearched) {
+            this.$store.dispatch("setSearchListTvVisible", true);
+            this.$store.dispatch("checkSearchListTv", this.tvInput);
+            this.tvInputSearched = this.tvInput;
+          }
         }
       }, 1500)
     },
@@ -189,8 +205,12 @@ export default {
       window.clearTimeout(this.timeout);
       this.timeout = window.setTimeout(() => {
         if(this.peopleInput.length > 2) {
-          this.$store.dispatch("setSearchListPeopleVisible", true)
-          this.$store.dispatch("checkSearchListPeople", this.peopleInput)
+          if(this.peopleInput !== this.peopleInputSearched) {
+            this.$store.dispatch("setSearchListPeopleVisible", true);
+            this.$store.dispatch("checkSearchListPeople", this.peopleInput);
+            this.peopleInputSearched = this.peopleInput;
+          }
+          
         }
       }, 1500)
     },

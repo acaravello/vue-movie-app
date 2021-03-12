@@ -682,6 +682,12 @@ export default new Vuex.Store({
           console.log("search list people are");
           console.log(response.data.results)
           let responseDataFiltered = [...response.data.results];
+          for(let i = 0; i < responseDataFiltered.length; i++) {
+            if(!responseDataFiltered[i].profile_path) {
+              responseDataFiltered.splice(i, 1);
+              i--;
+            }
+          }
           commit("setSearchListPeopleRetrieved", responseDataFiltered);
         })
         .catch((error) => {
