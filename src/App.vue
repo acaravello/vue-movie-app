@@ -3,8 +3,8 @@
     <header>
       <div id="nav">
         <router-link to="/" :class="$route.path === '/detail' && !knownForActive ? 'router-link-exact-active' : null">Movies</router-link>
-        <router-link to="/tv-series" @click.native="resetState" :class="$route.path === '/series-detail' && !knownForActive ? 'router-link-exact-active' : null">Tv Series</router-link>
-        <router-link to="/people" @click.native="resetState" :class="$route.path === '/known-for' || $route.path === '/filmography' || knownForActive ? 'router-link-exact-active' : null">People</router-link>
+        <router-link to="/tv-series" @click.native="resetStateComplete" :class="$route.path === '/series-detail' && !knownForActive ? 'router-link-exact-active' : null">Tv Series</router-link>
+        <router-link to="/people" @click.native="resetStateComplete" :class="$route.path === '/known-for' || $route.path === '/filmography' || knownForActive ? 'router-link-exact-active' : null">People</router-link>
         <router-link to="/search" @click.native="resetState">Search</router-link>
       </div>
     </header>
@@ -27,6 +27,12 @@ export default {
       this.$store.dispatch("setMovieActiveSection", "popular");
       this.$store.dispatch("setKnownForActive", false);
       this.$store.dispatch("setSearchActiveSection", "movies");
+    },
+    resetStateComplete() {
+      this.$store.dispatch("setMovieActiveSection", "popular");
+      this.$store.dispatch("setKnownForActive", false);
+      this.$store.dispatch("setSearchActiveSection", "movies");
+      this.$store.dispatch("resetSearchLists");
     }
   },
    computed: mapGetters({
