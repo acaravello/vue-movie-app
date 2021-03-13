@@ -43,7 +43,7 @@ export default {
   }, 
 
   methods: {
-      
+
      toPersonDetail(person) {
       this.$store.dispatch("setActorSelected", person)
       this.$store.dispatch("setKnownForBackdropPath", this.fromCastToDetailBackground);

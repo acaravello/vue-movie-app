@@ -133,6 +133,7 @@ export default {
 
     beforeMount() {
       this.$store.dispatch("getTvSeriesDetailFromId");
+      this.$store.dispatch("setCastFrom", "tv");
     },
 
     mounted() {
@@ -152,6 +153,7 @@ export default {
         this.$store.dispatch("setCastOf", this.title);
         this.$store.dispatch("setCastArray", null);
         this.$store.dispatch("checkTvCast", this.tvSeriesDetail.id);
+        this.$store.dispatch("setKnownForActive", false);
         this.$router.push({path: "/cast"});
       }
     }

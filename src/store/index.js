@@ -52,6 +52,7 @@ export default new Vuex.Store({
     castOf: null,
     castArray: null,
     fromCastToDetailBackground: null,
+    castFrom: null,
   },
 
   getters: {
@@ -203,6 +204,10 @@ export default new Vuex.Store({
 
     fromCastToDetailBackground(state) {
       return state.fromCastToDetailBackground;
+    },
+
+    castFrom(state) {
+      return state.castFrom;
     }
 
   },
@@ -366,6 +371,10 @@ export default new Vuex.Store({
 
     setFromCastToDetailBackground(state, userData) {
       state.fromCastToDetailBackground = userData;
+    },
+
+    setCastFrom(state, userData) {
+      state.castFrom = userData;
     }
 
   },
@@ -738,6 +747,10 @@ export default new Vuex.Store({
 
     setFromCastToDetailBackground({commit}, element) {
       commit("setFromCastToDetailBackground", element);
+    },
+
+    setCastFrom({commit}, element) {
+      commit("setCastFrom", element)
     },
 
     checkMovieCast({commit}, elementId) {

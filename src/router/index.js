@@ -61,4 +61,15 @@ const router = new VueRouter({
   }
 })
 
+let firstLoad = true;
+
+router.beforeEach((to, from, next) => {
+  if(firstLoad) {
+    firstLoad = false;
+    next({name: 'Home'})
+  } else {
+    next();
+  }
+})
+
 export default router

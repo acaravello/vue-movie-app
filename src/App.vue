@@ -2,8 +2,8 @@
   <div id="app">
     <header>
       <div id="nav">
-        <router-link to="/" :class="$route.path === '/detail' && !knownForActive ? 'router-link-exact-active' : null">Movies</router-link>
-        <router-link to="/tv-series" @click.native="resetStateComplete" :class="$route.path === '/series-detail' && !knownForActive ? 'router-link-exact-active' : null">Tv Series</router-link>
+        <router-link to="/" :class="$route.path === '/detail' && !knownForActive || $route.path === '/cast' && this.castFrom === 'movie' ? 'router-link-exact-active' : null">Movies</router-link>
+        <router-link to="/tv-series" @click.native="resetStateComplete" :class="$route.path === '/series-detail' && !knownForActive  || $route.path === '/cast' && this.castFrom === 'tv' ? 'router-link-exact-active' : null">Tv Series</router-link>
         <router-link to="/people" @click.native="resetStateComplete" :class="$route.path === '/known-for' || $route.path === '/filmography' || knownForActive ? 'router-link-exact-active' : null">People</router-link>
         <router-link to="/search" @click.native="resetState">Search</router-link>
       </div>
@@ -37,6 +37,7 @@ export default {
   },
    computed: mapGetters({
     knownForActive: "knownForActive",
+    castFrom: "castFrom",
   }),
 
   beforeMount() {
