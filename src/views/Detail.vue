@@ -44,11 +44,20 @@
                 </div>
               </div>
 
+              <div class="buttons-container">
+                <div class="cast-container">
+                <a @click="goToCast">
+                  <cast-icon />
+                  <span class="link-text">Cast</span>
+              </a>
+              </div>
+
                <div class="back-container">
                 <a @click="goBack">
                   <back-icon />
                   <span class="link-text">Back</span>
               </a>
+              </div>
               </div>
 
               </div>
@@ -64,7 +73,8 @@
 </template>
 
 <script>
-import BackIcon from '../assets/icons/backIcon.vue'
+import BackIcon from '../assets/icons/backIcon.vue';
+import CastIcon from "../assets/icons/castIcon.vue";
 
 
 export default {
@@ -72,7 +82,8 @@ export default {
     name: "detail",
 
     components: {
-      BackIcon
+      BackIcon,
+      CastIcon
     },
  
       data() {
@@ -134,6 +145,14 @@ export default {
     methods: {
       goBack()  {
         this.$router.back();
+      },
+
+      goToCast() {
+        this.$store.dispatch("setFromCastToDetailBackground", this.backdropPath);
+        this.$store.dispatch("setCastOf", this.title);
+        this.$store.dispatch("setCastArray", null);
+        this.$store.dispatch("checkMovieCast", this.movieDetail.id);
+        this.$router.push({path: "/cast"});
       }
     }
 
@@ -233,7 +252,60 @@ export default {
 
     }
 
+    
+  .buttons-container {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: -30px;
+
+    .cast-container {
+        display: flex;
+        margin-top: 30px;
+        margin-right: 20px;
+        text-transform: uppercase;
+        opacity: 1;
+        transition: opacity 0.8s ease;
+
+        &:hover {
+          opacity: 0.8;
+        }
+
+       a {
+         border: 1px solid #00e67a;
+         padding: .475rem .95rem;
+         line-height: 20px;
+         border-radius: .25rem;
+         font-size: 0.8rem;
+         color: #00e67a;
+         cursor: pointer;
+
+            svg {
+            width:15px;
+            height: auto;
+            fill: #00e67a;
+            margin-right: 8px;
+            margin-bottom: 3px;
+            }
+
+            .cast {
+              margin-top: -2px;
+              width: 14px;
+            }
+
+            .filmography {
+              width: 13px;
+              height: auto;
+              fill: #00e67a;
+              margin-right: 8px;
+              margin-bottom: 5px;
+            }
+          }
+    }
+
     .back-container {
+      display: flex;
       margin-top: 30px;
       text-transform: uppercase;
       opacity: 1;
@@ -252,17 +324,16 @@ export default {
          color: #00e67a;
          cursor: pointer;
 
-          svg {
-          width:15px;
-          height: auto;
-          fill: #00e67a;
-          margin-right: 8px;
-          margin-bottom: 3px;
+            svg {
+            width:15px;
+            height: auto;
+            fill: #00e67a;
+            margin-right: 8px;
+            margin-bottom: 3px;
+            }
+          }
         }
-       }
-      
-    }
-
+      }
   }
 
   

@@ -46,7 +46,12 @@ export default new Vuex.Store({
     searchListTvVisible: false,
     searchListTvRetrieved: null,
     searchListPeopleVisible: false,
-    searchListPeopleRetrieved: null
+    searchListPeopleRetrieved: null,
+
+    //Cast
+    castOf: null,
+    castArray: null,
+    fromCastToDetailBackground: null,
   },
 
   getters: {
@@ -185,6 +190,19 @@ export default new Vuex.Store({
 
     searchListPeopleRetrieved(state) {
       return state.searchListPeopleRetrieved
+    },
+
+    //Cast
+    castOf(state) {
+      return state.castOf;
+    },
+
+    castArray(state) {
+      return state.castArray;
+    },
+
+    fromCastToDetailBackground(state) {
+      return state.fromCastToDetailBackground;
     }
 
   },
@@ -335,6 +353,19 @@ export default new Vuex.Store({
 
     setSearchListPeopleRetrieved(state, userData) {
       state.searchListPeopleRetrieved = userData
+    },
+
+    //Cast
+    setCastOf(state, userData) {
+      state.castOf = userData;
+    },
+
+    setCastArray(state, userData) {
+      state.castArray = userData;
+    },
+
+    setFromCastToDetailBackground(state, userData) {
+      state.fromCastToDetailBackground = userData;
     }
 
   },
@@ -534,7 +565,7 @@ export default new Vuex.Store({
 
           let responseDataFiltered = [...response.data.cast];
           for(let i = 0; i < responseDataFiltered.length; i++) {
-            if(!responseDataFiltered[i].poster_path || responseDataFiltered[i].character.toLowerCase().indexOf("self") !== -1
+            if(!responseDataFiltered[i].poster_path || (responseDataFiltered[i].character && responseDataFiltered[i].character.toLowerCase().indexOf("self") !== -1)
              || responseDataFiltered[i].character === "") {
               responseDataFiltered.splice(i, 1);
               i--;
@@ -695,6 +726,69 @@ export default new Vuex.Store({
           console.log(error);
         });
     },
+
+    //Cast
+    setCastOf({commit}, element) {
+      commit("setCastOf", element);
+    },
+
+    setCastArray({commit}, element) {
+      commit("setCastArray", element)
+    },
+
+    setFromCastToDetailBackground({commit}, element) {
+      commit("setFromCastToDetailBackground", element);
+    },
+
+    checkMovieCast({commit}, elementId) {
+      const key = process.env.VUE_APP_API_KEY;
+      axios
+        .get(
+          `https://api.themoviedb.org/3/movie/${elementId}/credits?api_key=${key}&language=en-US&page=1`
+          
+        )
+        .then((response) => {
+          console.log("cast for the movie is");
+          console.log(response.data.cast);
+          let responseDataFiltered = [...response.data.cast];
+          for(let i = 0; i < responseDataFiltered.length; i++) {
+            if(!responseDataFiltered[i].profile_path) {
+              responseDataFiltered.splice(i, 1);
+              i--;
+            }
+          }
+          commit("setCastArray", responseDataFiltered);
+        })
+        .catch((error) => {
+          console.log("Error in contacting movie db");
+          console.log(error);
+        });
+    },
+
+    checkTvCast({commit}, elementId) {
+      const key = process.env.VUE_APP_API_KEY;
+      axios
+        .get(
+          `https://api.themoviedb.org/3/tv/${elementId}/credits?api_key=${key}&language=en-US&page=1`
+          
+        )
+        .then((response) => {
+          console.log("cast for the tv series is");
+          console.log(response.data.cast);
+          let responseDataFiltered = [...response.data.cast];
+          for(let i = 0; i < responseDataFiltered.length; i++) {
+            if(!responseDataFiltered[i].profile_path) {
+              responseDataFiltered.splice(i, 1);
+              i--;
+            }
+          }
+          commit("setCastArray", responseDataFiltered);
+        })
+        .catch((error) => {
+          console.log("Error in contacting movie db");
+          console.log(error);
+        });
+    }
 
   }
 })

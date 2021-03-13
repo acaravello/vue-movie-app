@@ -44,6 +44,11 @@ const routes = [
     path: '/filmography',
     name: 'Filmography',
     component: () => import ('../views/Filmography.vue')
+  },
+  {
+    path: "/cast",
+    name: "Cast",
+    component: () => import ("../views/Cast.vue")
   }
 ]
 
