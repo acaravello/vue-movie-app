@@ -53,6 +53,7 @@ export default new Vuex.Store({
     castArray: null,
     fromCastToDetailBackground: null,
     castFrom: null,
+    director: null,
   },
 
   getters: {
@@ -208,6 +209,10 @@ export default new Vuex.Store({
 
     castFrom(state) {
       return state.castFrom;
+    },
+
+    director(state) {
+      return state.director;
     }
 
   },
@@ -375,6 +380,10 @@ export default new Vuex.Store({
 
     setCastFrom(state, userData) {
       state.castFrom = userData;
+    },
+
+    setDirector(state, userData) {
+      state.director = userData;
     }
 
   },
@@ -753,6 +762,10 @@ export default new Vuex.Store({
       commit("setCastFrom", element)
     },
 
+    setDirector({commit}, element) {
+      commit("setDirector", element);
+    },
+
     checkMovieCast({commit}, elementId) {
       const key = process.env.VUE_APP_API_KEY;
       axios
@@ -761,6 +774,16 @@ export default new Vuex.Store({
           
         )
         .then((response) => {
+          console.log("crw");
+          console.log(response.data.crew);
+          let director = response.data.crew.filter(el => {
+            return el.job==="Director";
+          });
+
+          commit("setDirector", director);
+
+          console.log("Director");
+          console.log(director)
           console.log("cast for the movie is");
           console.log(response.data.cast);
           let responseDataFiltered = [...response.data.cast];

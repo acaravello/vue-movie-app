@@ -152,6 +152,7 @@ export default {
         this.$store.dispatch("setFromCastToDetailBackground", this.backdropPath);
         this.$store.dispatch("setCastOf", this.title);
         this.$store.dispatch("setCastArray", null);
+        this.$store.dispatch("setDirector", null);
         this.$store.dispatch("checkMovieCast", this.movieDetail.id);
         this.$store.dispatch("setKnownForActive", false);
         this.$router.push({path: "/cast"});

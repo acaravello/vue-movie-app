@@ -150,8 +150,9 @@ export default {
 
       goToCast() {
         this.$store.dispatch("setFromCastToDetailBackground", this.backdropPath);
-        this.$store.dispatch("setCastOf", this.title);
+        this.$store.dispatch("setCastOf", this.seriesTitle);
         this.$store.dispatch("setCastArray", null);
+        this.$store.dispatch("setDirector", null);
         this.$store.dispatch("checkTvCast", this.tvSeriesDetail.id);
         this.$store.dispatch("setKnownForActive", false);
         this.$router.push({path: "/cast"});

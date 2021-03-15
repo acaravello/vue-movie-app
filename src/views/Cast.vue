@@ -2,6 +2,20 @@
   <div class="cast">
     <div class="cast-list-container">
         <h1>{{castOf}}</h1>
+
+    <div v-if="director">
+      <div class="cards-container">
+        <div class="card" v-for="person in director" :key="person.id" @click="toPersonDetail(person)">
+          <img :src="imageRootPath + person.profile_path" class="card-img-top" :alt="person.name" />
+          <div class="card-body">
+            <h5 class="card-title-director-role">Director</h5>
+            <h5 class="card-title card-title-director">{{person.name}}</h5>
+          </div>
+
+        </div>
+      </div>
+    </div>
+        
       <div class="cards-container">
         <div class="card" v-for="person in castArray" :key="person.id" @click="toPersonDetail(person)">
           <img :src="imageRootPath + person.profile_path" class="card-img-top" :alt="person.name" />
@@ -30,14 +44,21 @@ export default {
   },
  
  computed: {
+
      castOf() {
       return this.$store.getters.castOf;
     },
+
     castArray() {
       return this.$store.getters.castArray;
     },
+
     fromCastToDetailBackground() {
         return this.$store.getters.fromCastToDetailBackground;
+    },
+
+    director() {
+      return this.$store.getters.director;
     }
 
   }, 
@@ -121,6 +142,20 @@ export default {
               text-transform: uppercase;
               border-bottom: 1px solid #00b35f;
               padding-bottom: 5px;
+
+              &.card-title-director {
+                border-bottom: none;
+              }
+
+              &.card-title-director-role {
+                border-bottom: none;
+                font-size: 15px;
+                padding-top: 18px;
+                margin-bottom: 0px;
+                padding-bottom: 0px;
+                color: #ddd;
+                letter-spacing: 0.2px;
+              }
             }
 
             img {
