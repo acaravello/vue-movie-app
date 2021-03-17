@@ -1,4 +1,4 @@
-# vue-movie-app
+# vuemdb
 
 ## Project setup
 ```
