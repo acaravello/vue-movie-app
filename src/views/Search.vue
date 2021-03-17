@@ -490,5 +490,19 @@ export default {
                 }
               }
    }
+
+
+  $small: 991px;
+  $medium: 992px;
+  @media screen and (max-width: $small) {
+
+    .search-wrapper {
+      width: auto;
+      margin-right: 20px;
+      margin-left: 20px;
+    }
+
+  }
+
 }
 </style>

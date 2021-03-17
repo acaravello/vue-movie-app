@@ -339,7 +339,27 @@ export default {
       }
   }
 
-  
+  $small: 991px;
+  $medium: 992px;
+  @media screen and (max-width: $small) {
+
+    .detail-card {
+      flex-direction: column;
+      padding-top: 36px;
+      .image-container {
+        margin-left: 0px !important;
+      }
+      .info-container {
+        margin-left: 0px !important;
+        .stats-info {
+          font-size: 22px !important;
+        }
+      }
+      .buttons-container {
+        margin-left: 0px !important;
+      }
+    }
+  }
 
 }
 </style>

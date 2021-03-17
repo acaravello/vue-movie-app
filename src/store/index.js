@@ -777,7 +777,7 @@ export default new Vuex.Store({
           console.log("crw");
           console.log(response.data.crew);
           let director = response.data.crew.filter(el => {
-            return el.job==="Director";
+            return el.job==="Director" && el.profile_path;
           });
 
           commit("setDirector", director);

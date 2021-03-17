@@ -197,6 +197,20 @@ export default {
 
   }
 
+  $small: 991px;
+  $medium: 992px;
+
+  @media screen and (max-width: $small) {
+
+    .card {
+      width: 15rem !important;
+    }
+    
+  }
+
 }
+
+
+
 </style>
 

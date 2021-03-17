@@ -288,7 +288,47 @@ export default {
           }
         }
       }
+    }
+  }
 
+  $small: 991px;
+  $medium: 992px;
+  @media screen and (max-width: $small) {
+
+    .detail-card {
+
+      flex-direction: column;
+      padding-top: 36px;
+
+      .image-container {
+
+        margin-left: 0px !important;
+
+      }
+
+      .stats-container {
+
+        margin-left: 0px !important;
+        display: block !important;
+        margin-top: 0px !important;
+
+        .stats-info {
+          font-size: 18px !important;
+          margin-left: 10px;
+        }
+
+        .stats-column {
+
+          margin-right: 0px !important;
+
+        }
+      }
+
+      .buttons-container {
+
+        margin-left: 0px !important;
+        
+      }
     }
   }
 
