@@ -230,12 +230,13 @@ footer {
 
 @media screen and (max-width: $small) {
 
-
-    .navbar-expand-lg {
-  justify-content: flex-end !important;
+  .navbar-expand-lg {
+    justify-content: flex-end !important;
   } 
+
   .navbar-toggler {
     line-height: inherit !important;
+    border: none !important;
   }
 
   .navbar.bg-light {
@@ -268,7 +269,10 @@ footer {
         border: 1px solid transparent;
   }
 
-  
+  footer {
+    padding: 30px 6px;
+  }
+
 }
 
 </style>
