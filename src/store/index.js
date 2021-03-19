@@ -532,7 +532,16 @@ export default new Vuex.Store({
         .then((response) => {
           console.log("popular people are");
           console.log(response);
-          commit("setPopularPeople", response.data.results)
+
+          let responseDataFiltered = response.data.results;
+
+          for(let i = 0; i < responseDataFiltered.length; i++) {
+            if(!responseDataFiltered[i].profile_path){
+              responseDataFiltered.splice(i, 1);
+              i--;
+            }
+          }
+          commit("setPopularPeople", responseDataFiltered)
         })
         .catch((error) => {
           console.log("Error in contacting movie db");
