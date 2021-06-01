@@ -31,7 +31,7 @@
     
     <footer>
       <div class="credits">
-        thanks to <div class="thanks"><a href="https://github.com/franci-star/" target="_blank">franci-star</a> </div> for the design
+        thanks to <div class="thanks"><a href="https://github.com/francescaformica" target="_blank">Francesca Formica</a> </div> for the design
       </div>
     </footer>
   </div>
